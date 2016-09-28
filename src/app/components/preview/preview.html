@@ -1,0 +1,21 @@
+<div class="preview__wrapper">
+    <div class="preview__heder">
+        <md-input-container class="md-block" flex-gt-sm>
+            <md-select aria-label="1" ng-model="vm.selectedDevice">
+                <md-option ng-click="vm.selectDevice(device)" ng-bind="device" ng-repeat="device in vm.devices" value="{{device}}">
+                    <span aria-label="{{device}}"></span>
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container>
+            <input type="text" ng-model="vm.dynamicSize.width" aria-label="width">
+        </md-input-container>
+        <md-input-container>
+            <input type="text" ng-model="vm.dynamicSize.height" aria-label="height">
+        </md-input-container>
+    </div>
+    <div id="resizable" resizable r-directions="['bottom', 'right']" r-flex="false" r-no-throttle="true" r-width="vm.dynamicSize.width"
+        r-height="vm.dynamicSize.height">
+        <iframe src="/preview.html" flex frameborder="0" id="preview__iframe" name="preview"></iframe>
+    </div>
+</div>
