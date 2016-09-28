@@ -27,30 +27,6 @@ class StoriesAPI {
 
     }
 
-    // of(name) {
-    //     let api = {
-    //         name
-    //     };
-
-    //     api.add = (title, story, model) => {
-    //         this.newStoryPoint(name, title, story, model);
-    //         return api;
-    //     }
-
-    //     return api;
-    // }
-
-    // newStoryPoint(of, title, story, model) {
-    //     if (!this.stories[of]) {
-    //         this.stories[of] = [];
-    //     }
-    //     this.stories[of].push({
-    //         title,
-    //         story,
-    //         model
-    //     });
-    // }
-
     getSections() {
         return this.sections;
     }
