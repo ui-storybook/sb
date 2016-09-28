@@ -17,7 +17,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import colorsSupported      from 'supports-color';
 import historyApiFallback   from 'connect-history-api-fallback';
 
-let root = 'client';
+let root = 'src';
 
 // helper method for resolving paths
 let resolveToApp = (glob = '') => {
@@ -77,7 +77,7 @@ gulp.task('serve', () => {
   config.entry.app = [
     // this modules required to make HRM working
     // it responsible for all this webpack magic
-    'webpack-hot-middleware/client?reload=true',
+    'webpack-hot-middleware?reload=true',
     // application entry point
   ].concat(paths.entry);
 
@@ -103,44 +103,6 @@ gulp.task('serve', () => {
 });
 
 gulp.task('watch', ['serve']);
-
-gulp.task('component', () => {
-  const cap = (val) => {
-    return val.charAt(0).toUpperCase() + val.slice(1);
-  };
-  const name = yargs.argv.name;
-  const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToComponents(), parentPath, name);
-
-  return gulp.src(paths.blankTemplates.component)
-    .pipe(template({
-      name: name,
-      upCaseName: cap(name)
-    }))
-    .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
-    }))
-    .pipe(gulp.dest(destPath));
-});
-
-gulp.task('module', () => {
-  const cap = (val) => {
-    return val.charAt(0).toUpperCase() + val.slice(1);
-  };
-  const name = yargs.argv.name;
-  const parentPath = yargs.argv.parent || '';
-  const destPath = path.join(resolveToModules(), parentPath, name);
-
-  return gulp.src(paths.blankTemplates.module)
-    .pipe(template({
-      name: name,
-      upCaseName: cap(name)
-    }))
-    .pipe(rename((path) => {
-      path.basename = path.basename.replace('temp', name);
-    }))
-    .pipe(gulp.dest(destPath));
-});
 
 gulp.task('clean', (cb) => {
   del([paths.dest]).then(function (paths) {
