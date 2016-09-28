@@ -6,7 +6,7 @@ config.entry = {
   app: './src/app',
   storiesAPI: './src/stories-api.js',
   stories: './src/stories',
-  components: './src/src'
+  components: './src/components'
 };
 
 config.output = {
