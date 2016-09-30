@@ -1,13 +1,6 @@
 import angular from 'angular';
+import './style.less'
+import module from '../helpers/angular/helper'
+import components from './components/components';
 
-import './styles/app.less'
-
-import './app.module';
-
-let element = document.getElementById('asb__main');
-
-angular
-    .element(element)
-    .ready(() => {
-        angular.bootstrap(element, ['asb'], { strictDi: false });
-    });
+module.$inject = ['components'];
