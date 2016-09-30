@@ -3,8 +3,9 @@ var path = require('path');
 var config = require('./webpack.config');
 
 config.entry = {
-  "sb": './src/sb',
+  "sb": './src/sb/index.js',
   "stories": './src/stories-api.js',
+  "ng-helper": './src/helpers/angular/helper.js',
 };
 
 config.output = {
