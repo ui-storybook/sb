@@ -3,6 +3,8 @@ var path = require('path');
 var config = require('./webpack.config');
 
 config.entry = {
+  "sb": './src/sb',
+  "stories": './src/stories-api.js',
   "app": './src/app',
   "user-stories": './src/stories'
 };

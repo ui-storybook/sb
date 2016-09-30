@@ -3,10 +3,6 @@ var webpack = require('webpack');
 
 module.exports = {
   devtool: 'source-map',
-  entry: {
-    "sb": './src/sb',
-    "stories": './src/stories-api.js',
-  },
   module: {
     loaders: [
        { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel' },

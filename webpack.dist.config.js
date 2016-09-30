@@ -1,6 +1,11 @@
 var webpack = require('webpack');
-var path    = require('path');
-var config  = require('./webpack.config');
+var path = require('path');
+var config = require('./webpack.config');
+
+config.entry = {
+  "sb": './src/sb',
+  "stories": './src/stories-api.js',
+};
 
 config.output = {
   filename: '[name].min.js',
