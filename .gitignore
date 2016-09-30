@@ -9,4 +9,7 @@ node_modules
 src/components
 src/stories
 
+dist/app.min.js
+
 .editorconfig
+
