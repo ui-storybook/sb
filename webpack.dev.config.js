@@ -3,17 +3,15 @@ var path = require('path');
 var config = require('./webpack.config');
 
 config.entry = {
-  app: './src/app',
-  storiesAPI: './src/stories-api.js',
-  stories: './src/stories',
-  components: './src/components'
+  "app": './src/app',
+  "user-stories": './src/stories'
 };
 
 config.output = {
   publicPath: '/',
   path: path.join(__dirname, "js"),
-  filename: "[name].bundle.js",
-  library: ["bundle", "[name]"]
+  filename: "[name].min.js",
+  library: ["min", "[name]"]
 };
 
 config.plugins = config.plugins.concat([

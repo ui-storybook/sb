@@ -4,8 +4,8 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: './src/app',
-    storiesAPI: './src/stories-api.js',
+    "sb": './src/sb',
+    "stories": './src/stories-api.js',
   },
   module: {
     loaders: [
