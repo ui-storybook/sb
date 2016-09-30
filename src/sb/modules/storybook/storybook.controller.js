@@ -12,11 +12,11 @@ class StorybookController {
     };
 
     this.keyActions = {
-      84: () => this.openTemplate(),
-      80: () => this.openPreview(),
-      77: () => this.openModel(),
+      // 84: () => this.openTemplate(),
+      // 80: () => this.openPreview(),
+      // 77: () => this.openModel(),
       // 82: () => this.toggleResponsive()
-    }
+    };
 
   }
 
