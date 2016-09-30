@@ -1,18 +1,22 @@
 {
   "name": "ui-storybook",
   "version": "0.0.1",
-  "description": "UI Storybook for esaly develop UI components for Angular 1.5.x, Angular 2, React etc...",
+  "description": "SB is the environment for developers that allow to esaly develop and support UI components with any framework.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ui-storybook/sb"
+  },
   "dependencies": {
     "angular": "^1.5.0",
     "angular-resizable": "^1.2.0",
     "angular-sanitize": "^1.5.8",
     "angular-ui-codemirror": "^0.3.0",
     "angular-ui-router": "^1.0.0-beta.2",
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
+    "angular-dnd-module": "^0.1.24"
   },
   "devDependencies": {
-    "angular-dnd-module": "^0.1.24",
     "angular-mocks": "^1.5.0",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
