@@ -6,4 +6,7 @@ node_modules
 *.log
 .idea
 
+src/components
+src/stories
+
 .editorconfig
