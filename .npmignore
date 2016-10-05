@@ -1,0 +1,14 @@
+.DS_Store
+.tmp
+.git
+node_modules
+.settings
+*.log
+.idea
+src
+dist/app.js
+.editorconfig
+webpack*
+spec.bundle.js
+karma.conf.js
+gulpfile.babel.js
