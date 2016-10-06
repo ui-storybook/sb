@@ -2,7 +2,7 @@ import * as angular from 'angular';
 
 import 'angular-ui-router';
 
-import 'angular-material'
+import 'angular-material';
 import 'angular-animate';
 import 'angular-material/angular-material.css';
 

@@ -1,4 +1,13 @@
 import angular from 'angular';
 const module = angular.module('components', []);
 
-export default module;
+module.component('test', {
+	controller: function () {
+	},
+	template: `<div>{{$ctrl.text}}</div>`,
+	bindings: {
+		text: '@'
+	}
+});
+
+export default module.name;

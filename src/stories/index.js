@@ -7,3 +7,9 @@ survey.story('Dayli plans')
   .add('Global', '<p>{{ vm.day }}</p>', {
     day: 'Monday'
   });
+
+let test = sb.section('Demo 3');
+test.story('Test')
+    .add('Test', '<test text="{{vm.text}}"></test>', {
+        text: 'Monday'
+    });
