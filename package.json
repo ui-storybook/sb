@@ -9,15 +9,15 @@
     "url": "https://github.com/ui-storybook/sb"
   },
   "dependencies": {
-    "ace-builds": "^1.2.5",
-    "angular": "^1.5.0",
+    "angular": "^1.5.0"
+  },
+  "devDependencies": {
     "angular-animate": "^1.5.8",
+    "ace-builds": "^1.2.5",
     "angular-aria": "^1.5.8",
     "angular-highlightjs": "^0.6.2",
     "angular-material": "^1.1.1",
-    "angular-ui-ace": "^0.2.3"
-  },
-  "devDependencies": {
+    "angular-ui-ace": "^0.2.3",
     "angular-resizable": "^1.2.0",
     "angular-sanitize": "^1.5.8",
     "angular-ui-codemirror": "^0.3.0",
