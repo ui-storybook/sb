@@ -45,60 +45,8 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	module.exports = __webpack_require__(576);
 
-	var _classCallCheck2 = __webpack_require__(310);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(311);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var StoriesAPI = function () {
-	    function StoriesAPI() {
-	        (0, _classCallCheck3.default)(this, StoriesAPI);
-
-	        this.sections = {};
-	    }
-
-	    (0, _createClass3.default)(StoriesAPI, [{
-	        key: "section",
-	        value: function section(name) {
-	            var _this = this;
-
-	            if (!this.sections[name]) {
-	                this.sections[name] = {};
-	            }
-
-	            var sectionAPI = {};
-
-	            sectionAPI.story = function (storyName) {
-	                var section = _this.sections[name];
-	                var storyAPI = {};
-	                storyAPI.add = function (title, template, model) {
-	                    if (!section[storyName]) {
-	                        section[storyName] = [];
-	                    }
-	                    section[storyName].push({ title: title, template: template, model: model });
-	                };
-	                return storyAPI;
-	            };
-
-	            return sectionAPI;
-	        }
-	    }, {
-	        key: "getSections",
-	        value: function getSections() {
-	            return this.sections;
-	        }
-	    }]);
-	    return StoriesAPI;
-	}();
-
-	window.sb = new StoriesAPI();
 
 /***/ },
 
@@ -428,6 +376,66 @@
 	    value       : value
 	  };
 	};
+
+/***/ },
+
+/***/ 576:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _classCallCheck2 = __webpack_require__(310);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(311);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var StoriesAPI = function () {
+	    function StoriesAPI() {
+	        (0, _classCallCheck3.default)(this, StoriesAPI);
+
+	        this.sections = {};
+	    }
+
+	    (0, _createClass3.default)(StoriesAPI, [{
+	        key: "section",
+	        value: function section(name) {
+	            var _this = this;
+
+	            if (!this.sections[name]) {
+	                this.sections[name] = {};
+	            }
+
+	            var sectionAPI = {};
+
+	            sectionAPI.story = function (storyName) {
+	                var section = _this.sections[name];
+	                var storyAPI = {};
+	                storyAPI.add = function (title, template, model) {
+	                    if (!section[storyName]) {
+	                        section[storyName] = [];
+	                    }
+	                    section[storyName].push({ title: title, template: template, model: model });
+	                };
+	                return storyAPI;
+	            };
+
+	            return sectionAPI;
+	        }
+	    }, {
+	        key: "getSections",
+	        value: function getSections() {
+	            return this.sections;
+	        }
+	    }]);
+	    return StoriesAPI;
+	}();
+
+	window.sb = new StoriesAPI();
 
 /***/ }
 

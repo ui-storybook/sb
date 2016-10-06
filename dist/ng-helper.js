@@ -45,6 +45,14 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(306);
+
+
+/***/ },
+
+/***/ 306:
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -73,14 +81,7 @@
 	    controllerAs: 'vm'
 	});
 
-	var preview = document.createElement('preview-helper');
-	document.body.appendChild(preview);
-
-	angular.element(preview).ready(function () {
-	    angular.bootstrap(preview, ['helper'], { strictDi: false });
-	});
-
-	exports.default = _module;
+	exports.default = _module.name;
 
 /***/ },
 
