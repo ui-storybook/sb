@@ -11,13 +11,4 @@ module.component('previewHelper', {
     controllerAs: 'vm'
 });
 
-let preview = document.createElement('preview-helper');
-document.body.appendChild(preview);
-
-angular
-    .element(preview)
-    .ready(() => {
-        angular.bootstrap(preview, ['helper'], { strictDi: false });
-    });
-
-export default module;
+export default module.name;
