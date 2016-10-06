@@ -1,1 +1,1 @@
-module.exports = require('./dist/ng-helper');
+module.exports = require('../dist/ng-helper');
