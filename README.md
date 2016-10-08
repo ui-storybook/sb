@@ -12,7 +12,7 @@ Fasted way to start is clone SB boilerpalate:
 [Angular boilerplate](https://github.com/ui-storybook/sb-angular-boilerplate)
 
 **Installation**   
-Install dependencies `npm i`  
+`npm i` Install dependencies  
 
 **Available tasks**  
 `npm start` start dev server with live reload  
