@@ -8,5 +8,5 @@ Basically SB was designed for support any frameworks and libraries. All you comp
 For now SB have only Angular 1.5x helper. Helpers for NG2, React and Vue.js coming very soon.
 
 ### Getting started
-Fasted way to start is clone SB boilerpalate:
+Fasted way to start is clone SB boilerpalate:  
 [Angular boilerplate](https://github.com/ui-storybook/sb-angular-boilerplate)
