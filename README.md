@@ -11,9 +11,13 @@ For now SB have only Angular 1.5x helper. Helpers for NG2, React and Vue.js comi
 Fasted way to start is clone SB boilerpalate:  
 [Angular boilerplate](https://github.com/ui-storybook/sb-angular-boilerplate)
 
-**Installation**   
-`npm i` Install dependencies  
+```bash
+# Installation
+npm install
 
-**Available tasks**  
-`npm start` start dev server with live reload  
-`npm run build` create new build
+# Start dev server with live reload  
+npm start
+
+# Create new build
+npm run build
+```
