@@ -19,6 +19,7 @@ class StoriesAPI {
                     section[storyName] = [];
                 }
                 section[storyName].push({ title, template, model });
+                return storyAPI;
             }
             return storyAPI;
         };
