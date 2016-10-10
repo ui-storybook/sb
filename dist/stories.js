@@ -420,6 +420,7 @@
 	                        section[storyName] = [];
 	                    }
 	                    section[storyName].push({ title: title, template: template, model: model });
+	                    return storyAPI;
 	                };
 	                return storyAPI;
 	            };
