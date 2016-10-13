@@ -1,11 +1,26 @@
-let overview = sb.section('Demo');
-overview.story('User statistic')
-  .add('Week chart', '<p>User statistic</p>');
 
-let survey = sb.section('Demo 2');
-survey.story('Dayli plans')
-  .add('Global', '<p>{{ vm.day }}</p>', {
+let survey = sb.section('The week');
+survey.story('Names of the days of the week')
+  .add('Sunday', '<p>{{ vm.day }}</p>', {
+    day: 'Sunday'
+  })
+  .add('Monday', '<p>{{ vm.day }}</p>', {
     day: 'Monday'
+  })
+  .add('Tuesday', '<p>{{ vm.day }}</p>', {
+    day: 'Tuesday'
+  })
+  .add('Wednesday', '<p>{{ vm.day }}</p>', {
+    day: 'Wednesday'
+  })
+  .add('Thursday', '<p>{{ vm.day }}</p>', {
+    day: 'Thursday'
+  })
+  .add('Friday', '<p>{{ vm.day }}</p>', {
+    day: 'Friday'
+  })
+  .add('Saturday', '<p>{{ vm.day }}</p>', {
+    day: 'Saturday'
   });
 
 let test = sb.section('Demo 3');
