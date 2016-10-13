@@ -19,7 +19,7 @@
         ng-click="vm.selectComponentFromList(story, component)" ng-class="{'active': vm.active.point === component.title}"
         aria-label="{{ vm.active.point }}">
         <div class="md-list-item-text" layout="column">
-            <h3 ng-bind="component.title"></h3>
+            <h3 class="story__list-item" ng-bind="component.title"></h3>
         </div>
     </md-list-item>
 </div>
