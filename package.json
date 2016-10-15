@@ -1,6 +1,6 @@
 {
   "name": "ui-storybook",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SB is the environment for developers that allow to esaly develop and support UI components with any framework.",
   "main": "index.js",
   "types": "./src/sb.d.ts",
@@ -9,7 +9,27 @@
     "url": "https://github.com/ui-storybook/sb"
   },
   "dependencies": {
-    "angular": "^1.5.0"
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-runtime": "^6.7.5",
+    "babel-polyfill": "^6.7.4",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "babel-runtime": "^6.6.1",
+    "browser-sync": "^2.11.1",
+    "browser-sync-webpack-plugin": "^1.1.3",
+    "connect-history-api-fallback": "^1.1.0",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.19.0",
+    "html-webpack-plugin": "^1.7.0",
+    "node-libs-browser": "^0.5.0",
+    "raw-loader": "^0.5.1",
+    "run-sequence": "^1.1.0",
+    "style-loader": "^0.12.2",
+    "webpack": "^1.9.5",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.6.0"
   },
   "devDependencies": {
     "angular-animate": "^1.5.8",
