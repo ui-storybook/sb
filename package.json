@@ -1,6 +1,6 @@
 {
   "name": "ui-storybook",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "SB is the environment for developers that allow to esaly develop and support UI components with any framework.",
   "main": "index.js",
   "types": "./src/sb.d.ts",
@@ -18,7 +18,6 @@
     "babel-register": "^6.7.2",
     "babel-runtime": "^6.6.1",
     "browser-sync": "^2.11.1",
-    "browser-sync-webpack-plugin": "^1.1.3",
     "connect-history-api-fallback": "^1.1.0",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.19.0",
