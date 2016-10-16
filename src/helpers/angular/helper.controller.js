@@ -9,9 +9,15 @@ class HelperController {
     }
 
     $onInit() {
+
+        // Tell sb that helper already loaded;
+        window.parent.sb.contact();
+
+        // Register lissener for render new component
         this.postMessageListener = window.addEventListener('message', event => {
             event.data && this.events[event.data.type].call(this, event.data.data);
         }, false);
+
     }
 
     $onDestroy() {

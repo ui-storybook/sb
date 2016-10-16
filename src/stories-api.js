@@ -32,6 +32,14 @@ class StoriesAPI {
         return this.sections;
     }
 
+    registerContactCB(cb) {
+        this.contactCB = cb;
+    }
+
+    contact() {
+        this.contactCB();
+    }
+
 }
 
 window.sb = new StoriesAPI();

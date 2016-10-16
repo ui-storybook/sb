@@ -9,6 +9,11 @@ class StoryListController {
     this.$state = $state;
     this.$scope = $scope;
 
+    sb.registerContactCB(() => {
+      this.selectComponent();
+      this.$scope.$apply();
+    });
+
     // Get all section
     this.sections = sb.getSections();
 
@@ -25,11 +30,6 @@ class StoryListController {
     this.selectStory();
 
     this.$mdSidenav('left').open();
-
-    setTimeout(() => {
-      this.selectComponent();
-      this.$scope.$apply();
-    }, 1000);
 
   }
 
