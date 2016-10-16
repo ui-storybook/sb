@@ -34,7 +34,7 @@ npm run sb-publish
 ```
 
 #### Powered your project
-1. First you need to import you main project module to `sb/index.js`  
+First you need to import you main project module to `sb/index.js`  
 For `Angular` based app:
 
 ```js
@@ -49,7 +49,7 @@ const mainModule = angular.module('sb', [
 
 ```
 
-2. Write your stories  
+Write your stories  
 SB provide simple api for you:
 
 ```js
@@ -77,7 +77,7 @@ SB provide simple api for you:
 
 ``` 
 
-3. Run SB in browser or load it to GitHub Pages  
+Run SB in browser or load it to GitHub Pages  
     `npm run sb` — will load SB server with livereload which allow you to easily develop UI components.  
     `npm run sb-publish` — will bild and load SB to GitHub Pages.
 
