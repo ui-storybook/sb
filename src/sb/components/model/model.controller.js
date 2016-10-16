@@ -8,7 +8,8 @@ class ModelController {
       mode: 'json',
       useWrapMode : true,
       // showGutter: false,
-      onLoad: this.onEditorChange.bind(this)
+      onLoad: this.onEditorChange.bind(this),
+      $blockScrolling: Infinity
     }
     this.$rootScope = $rootScope;
     this.inFirst = true;
