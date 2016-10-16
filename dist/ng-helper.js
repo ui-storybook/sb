@@ -874,6 +874,10 @@
 	        value: function $onInit() {
 	            var _this = this;
 
+	            // Tell sb that helper already loaded;
+	            window.parent.sb.contact();
+
+	            // Register lissener for render new component
 	            this.postMessageListener = window.addEventListener('message', function (event) {
 	                event.data && _this.events[event.data.type].call(_this, event.data.data);
 	            }, false);

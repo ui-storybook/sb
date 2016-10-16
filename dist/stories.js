@@ -432,6 +432,16 @@
 	        value: function getSections() {
 	            return this.sections;
 	        }
+	    }, {
+	        key: "registerContactCB",
+	        value: function registerContactCB(cb) {
+	            this.contactCB = cb;
+	        }
+	    }, {
+	        key: "contact",
+	        value: function contact() {
+	            this.contactCB();
+	        }
 	    }]);
 	    return StoriesAPI;
 	}();
