@@ -8,8 +8,7 @@ class ModelController {
       mode: 'json',
       useWrapMode : true,
       // showGutter: false,
-      onLoad: this.onEditorChange.bind(this),
-      $blockScrolling: Infinity
+      onLoad: this.onEditorChange.bind(this)
     }
     this.$rootScope = $rootScope;
     this.inFirst = true;
@@ -20,6 +19,7 @@ class ModelController {
   }
 
   onEditorChange(editor) {
+    editor.$blockScrolling = Infinity;
     let session = editor.getSession();
     session.on("change", (e) => {
       this.broadcastModel(session.getValue());
