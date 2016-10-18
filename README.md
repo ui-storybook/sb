@@ -3,6 +3,8 @@ SB is the **environment** for developers that allow to esaly develop and support
 SB is the **tool** for designers that allow to easily review and test UI components that developers made.  
 SB is the **storybook** for teams and companies that helped him to keep UI consistent and documented.
 
+![SB demo image](docs/sb-demo.gif)
+
 ### How it looks like?
 See the demo with [angular material](https://material.angularjs.org/latest/) cards — [Demo](https://ui-storybook.github.io/sb-angular-material-cards-demo/#/?split=true)  
 And demo repository — [Demo repository](https://github.com/ui-storybook/sb-angular-material-cards-demo)
