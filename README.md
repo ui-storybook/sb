@@ -3,9 +3,15 @@ SB is the **environment** for developers that allow to esaly develop and support
 SB is the **tool** for designers that allow to easily review and test UI components that developers made.  
 SB is the **storybook** for teams and companies that helped him to keep UI consistent and documented.
 
+### How it looks like?
+See the demo with [angular material](https://material.angularjs.org/latest/) cards — [Demo](https://ui-storybook.github.io/sb-angular-material-cards-demo/#/?split=true)  
+And demo repository — [Demo repository](https://github.com/ui-storybook/sb-angular-material-cards-demo)
+
 ### What is supported now?
 Basically SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
 For now SB support only Angular 1.x. Suppontion for NG2, React and Vue.js coming very soon.
+
+
 
 ### Getting started
 Fasted way to add SB to your project is use [sb-cli](https://github.com/ui-storybook/sb-cli):  
