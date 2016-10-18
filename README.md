@@ -1,6 +1,6 @@
 # SB [![npm version](https://badge.fury.io/js/ui-storybook.svg)](https://badge.fury.io/js/ui-storybook)
 SB is the **environment** for developers that allow to esaly develop and support UI components with any framework.  
-SB is the **tool** for designers that allow to easily review and test UI components that developers made.  
+SB is the **tool** for designers that allows to easily review and test UI components that developers made.  
 SB is the **storybook** for teams and companies that helped him to keep UI consistent and documented.
 
 ![SB demo image](docs/sb-demo.gif)
