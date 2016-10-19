@@ -20,7 +20,6 @@ import routeConfig from './core.route';
 const core = angular.module('asb.core', [
     'ui.router',
     'ngMaterial',
-    'hljs',
     'ngAnimate',
     'angularResizable',
     'ui.ace'
@@ -41,12 +40,6 @@ core.config(routeConfig);
 core.config(($mdThemingProvider) => {
     $mdThemingProvider.theme('default')
         .accentPalette('blue');
-});
-
-core.config((hljsServiceProvider) => {
-    hljsServiceProvider.setOptions({
-        tabReplace: '    '
-    });
 });
 
 function runFunc() {
