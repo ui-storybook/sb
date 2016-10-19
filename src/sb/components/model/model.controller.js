@@ -1,13 +1,16 @@
 class ModelController {
   constructor($rootScope, $parse) {
     this.$parse = $parse;
+
+    // Listen for new component data and render it
     this.listener = $rootScope.$on('render', (event, component) => {
       this.render(event, component);
     });
+
+    // ACE editor settings
     this.settings = {
       mode: 'json',
-      useWrapMode : true,
-      // showGutter: false,
+      useWrapMode: true,
       onLoad: this.onEditorChange.bind(this)
     }
     this.$rootScope = $rootScope;
@@ -21,23 +24,34 @@ class ModelController {
   onEditorChange(editor) {
     editor.$blockScrolling = Infinity;
     let session = editor.getSession();
+
+    // On editor change try to load new component
     session.on("change", (e) => {
       this.broadcastModel(session.getValue());
     });
   }
 
   broadcastModel(model) {
+
+    // Prevent first paint canges
     if (this.inFirst) {
       this.inFirst = false;
       return;
     }
+
+    // Try to render new molel 
     try {
       let v = JSON.parse(model);
       this.$rootScope.$broadcast('model', v);
-    } catch(e) {}
+    } catch (e) { }
   }
 
   render(event, component) {
+    // We need original template for prevent changes
+    // So store original component
+    this.originalComponent = component;
+
+    // Store model 
     this.model = JSON.stringify(component.model, null, Number(4));
   }
 
