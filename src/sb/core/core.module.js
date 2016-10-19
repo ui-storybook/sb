@@ -6,13 +6,12 @@ import 'angular-material';
 import 'angular-animate';
 import 'angular-material/angular-material.css';
 
-import 'angular-highlightjs';
-
 import 'angular-resizable';
 import 'angular-resizable/angular-resizable.min.css';
 
 import 'ace-builds/src-min-noconflict/ace.js';
 import 'ace-builds/src-min-noconflict/mode-json.js';
+import 'ace-builds/src-min-noconflict/mode-html.js';
 import 'angular-ui-ace';
 
 

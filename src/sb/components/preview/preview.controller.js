@@ -16,6 +16,13 @@ class PreviewController {
       });
     });
 
+    this.templateListener = $rootScope.$on('template', (event, component) => {
+      this.render(event, {
+        type: 'component',
+        data: component
+      });
+    });
+
     this.modelListener = $rootScope.$on('model', (event, model) => {
       this.render(event, {
         type: 'model',
@@ -47,6 +54,8 @@ class PreviewController {
 
   $onDestroy() {
     this.listener();
+    this.templateListener();
+    this.modelListener();
   }
 
   render(event, data) {
