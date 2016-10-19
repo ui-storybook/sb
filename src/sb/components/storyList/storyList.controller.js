@@ -55,7 +55,7 @@ class StoryListController {
 
     params.story = story;
     params.point = component.title;
-    params.story = this.selectedSection;
+    params.section = this.selectedSection;
 
     this.$state.go('main.storybook', params, {
       reload: false,
@@ -68,14 +68,15 @@ class StoryListController {
   }
 
   selectComponent(force) {
-    let storyTitle, pointTitle, component;
+    let section, storyTitle, pointTitle, component;
     let params = this.$state.params;
 
     if (!force && this.$state.params.story && this.$state.params.point) {
+      section = this.$state.params.section;
       storyTitle = this.$state.params.story;
       pointTitle = this.$state.params.point;
-      if (this.stories[storyTitle]) {
-        component = this.stories[storyTitle].find(point => point.title === pointTitle);
+      if (this.sections[section] && this.sections[section][storyTitle]) {
+        component = this.sections[section][storyTitle].find(point => point.title === pointTitle);
       }
     }
 
@@ -88,7 +89,7 @@ class StoryListController {
 
     params.story = storyTitle;
     params.point = component.title;
-    params.story = this.selectedSection;
+    params.section = this.selectedSection;
 
     this.$state.go('main.storybook', params, {
       reload: false,
