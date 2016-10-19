@@ -32865,7 +32865,7 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var core = angular.module('asb.core', ['ui.router', 'ngMaterial', 'hljs', 'ngAnimate', 'angularResizable', 'ui.ace']);
+	var core = angular.module('asb.core', ['ui.router', 'ngMaterial', 'ngAnimate', 'angularResizable', 'ui.ace']);
 
 	core.constant('local', function () {
 	    var isLocal = document.location.hostname === 'localhost';
@@ -32881,12 +32881,6 @@
 	// Thema config
 	core.config(["$mdThemingProvider", function ($mdThemingProvider) {
 	    $mdThemingProvider.theme('default').accentPalette('blue');
-	}]);
-
-	core.config(["hljsServiceProvider", function (hljsServiceProvider) {
-	    hljsServiceProvider.setOptions({
-	        tabReplace: '    '
-	    });
 	}]);
 
 	function runFunc() {}
