@@ -1,1 +1,2 @@
-<div ui-ace="vm.settings" ng-model="vm.component.template" flex></div>
+<div ng-if="!vm.renderError" ui-ace="vm.settings" ng-model="vm.component.template" flex></div>
+<div class="error__message" ng-if="vm.renderError" flex ng-bing="vm.errorMessage"></div>

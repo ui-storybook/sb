@@ -47,12 +47,19 @@ class ModelController {
   }
 
   render(event, component) {
+
     // We need original template for prevent changes
     // So store original component
     this.originalComponent = component;
 
-    // Store model 
-    this.model = JSON.stringify(component.model, null, Number(4));
+    try {
+      // Store model 
+      this.model = JSON.stringify(component.model, null, Number(4));
+      this.renderError = false;
+    } catch (e) {
+      this.renderError = true;
+    }
+
   }
 
 }
