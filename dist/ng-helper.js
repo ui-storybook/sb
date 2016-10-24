@@ -863,9 +863,10 @@
 	        (0, _classCallCheck3.default)(this, HelperController);
 
 	        this.$scope = $scope;
+
+	        // Allowed events from parrent iFrame
 	        this.events = {
-	            'component': this.loadComponent,
-	            'model': this.loadModel
+	            'component': this.loadComponent
 	        };
 	    }
 
@@ -886,16 +887,6 @@
 	        key: '$onDestroy',
 	        value: function $onDestroy() {
 	            this.postMessageListener();
-	        }
-	    }, {
-	        key: 'loadModel',
-	        value: function loadModel(model) {
-	            if (model) {
-	                for (var k in model) {
-	                    this[k] = model[k];
-	                }
-	            }
-	            this.$scope.$apply();
 	        }
 	    }, {
 	        key: 'loadComponent',
