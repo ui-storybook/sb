@@ -1,13 +1,24 @@
 <div class="sidebar__header">
-	<a href="https://github.com/ui-storybook/sb" target="_blank" class="sb-logo"></a>
-	<!--<div class="sb-logo"></div>-->
-	<md-button ng-click="vm.sloseSidebar()" class="md-icon-button button__close-sidebar" md-no-ink aria-label="Close sidebar">
-		<i class="material-icons icon__close-sidebar">arrow_back</i>
-	</md-button>
-</div>
-<div class="search">
-	<i class="material-icons icon__search">search</i>
-	<input type="text" ng-model="vm.search" placeholder="Search" class="search__input">
+
+	<div ng-if="!vm.searchPanel" class="sidebar__header-main">
+		<a href="https://github.com/ui-storybook/sb" target="_blank" class="sb-logo"></a>
+		<span flex></span>
+		<button ng-click="vm.openSearch()" class="md-icon-button md-button md-ink-ripple">
+		<i class="material-icons icon__search">search</i>
+	</button>
+		<md-button ng-click="vm.sloseSidebar()" class="md-icon-button button__close-sidebar" md-no-ink aria-label="Close sidebar">
+			<i class="material-icons icon__close-sidebar">arrow_back</i>
+		</md-button>
+	</div>
+
+	<div class="search" ng-if="vm.searchPanel">
+		<i class="material-icons icon__search">search</i>
+		<input type="text" ng-model="vm.search" placeholder="Search" class="search__input">
+		<md-button ng-click="vm.closeSearch()" class="md-icon-button button__close-sidebar" md-no-ink aria-label="Close sidebar">
+			<i class="material-icons icon__close-sidebar">close</i>
+		</md-button>
+	</div>
+
 </div>
 <md-input-container class="md-block section__select" flex-gt-sm ng-hide="vm.search.length">
 	<h2>Section</h2>
@@ -17,12 +28,14 @@
 		</md-option>
 	</md-select>
 </md-input-container>
-<div class="story__list" ng-repeat="(story, components) in vm.stories track by $index">
-	<md-subheader ng-class="{'active': vm.active.story === story}" ng-bind="story" class="story__name" ng-hide="vm.search.length"></md-subheader>
-	<md-list-item class="story__point md-2-line" ng-repeat="component in components | filter: { title: vm.search } track by $index"
-		ng-click="vm.selectComponentFromList(story, component)" ng-class="{'active': vm.active.point === component.title}" aria-label="{{ vm.active.point }}">
-		<div class="md-list-item-text" layout="column">
-			<h3 class="story__list-item" ng-bind="component.title"></h3>
-		</div>
-	</md-list-item>
-</div>
+<md-content>
+	<section class="story__list" ng-repeat="(story, components) in vm.stories track by $index">
+		<md-subheader ng-class="{'active': vm.active.story === story}" ng-bind="story" class="story__name" ng-hide="vm.search.length"></md-subheader>
+		<md-list-item class="story__point md-2-line" ng-repeat="component in components | filter: { title: vm.search } track by $index"
+			ng-click="vm.selectComponentFromList(story, component)" ng-class="{'active': vm.active.point === component.title}" aria-label="{{ vm.active.point }}">
+			<div class="md-list-item-text" layout="column">
+				<h3 class="story__list-item" ng-bind="component.title"></h3>
+			</div>
+		</md-list-item>
+	</section>
+</md-content>

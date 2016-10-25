@@ -1,8 +1,23 @@
-.sidebar__header {
+story-list {
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
+}
+
+.sidebar__header {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0,0,0,0.12);    
+}
+
+.sidebar__header-main {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.icon__search {
+    color: rgba(0, 0, 0, 0.54);
 }
 
 .search {
@@ -11,13 +26,8 @@
     align-items: center;
     padding-left: 13px;
 
-    .icon__search {
-        color: #444;
-        opacity: 0.5;
-    }
-
     .search__input {
-        width: 100%;
+        width: 210px;
         height: 60px;
         border: none;
         padding: 0 10px;
@@ -29,7 +39,7 @@
 .story__name {
     font-size: 14px;
     font-weight: 500;
-    color: rgba(0,0,0,0.54);
+    color: #448aff;
     letter-spacing: 0px;
     padding: 16px;
     background: #fff;
@@ -54,8 +64,13 @@
 
 }
 
-.story__list-item {
-    font-size: 14px !important;
+.story__list {
+    overflow: scroll;
+
+    .story__list-item {
+        font-size: 14px !important;
+    }
+
 }
 
 .button__close-sidebar {
@@ -83,6 +98,10 @@
         text-transform: capitalize;
     }
 
+}
+
+.md-subheader-wrapper:not(.md-sticky-no-effect)[sticky-state=active] {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;
 }
 
 .sb-logo {

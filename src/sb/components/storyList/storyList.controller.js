@@ -33,6 +33,16 @@ class StoryListController {
 
   }
 
+  openSearch() {
+    this.searchPanel = true;
+    setTimeout(() => document.getElementsByClassName('search__input')[0].focus(), 0);
+  }
+
+  closeSearch() {
+    this.search = '';
+    this.searchPanel = false;
+  }
+
   selectSection(sectionTitle) {
     this.selectStory(sectionTitle)
     this.selectComponent(true);
@@ -63,6 +73,8 @@ class StoryListController {
       inherit: false,
       notify: false
     });
+
+    this.closeSearch();
 
     this.$rootScope.$broadcast('render', component);
   }
