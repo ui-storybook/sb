@@ -342,192 +342,7 @@
 /* 292 */,
 /* 293 */,
 /* 294 */,
-/* 295 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	function defaultSetTimout() {
-	    throw new Error('setTimeout has not been defined');
-	}
-	function defaultClearTimeout () {
-	    throw new Error('clearTimeout has not been defined');
-	}
-	(function () {
-	    try {
-	        if (typeof setTimeout === 'function') {
-	            cachedSetTimeout = setTimeout;
-	        } else {
-	            cachedSetTimeout = defaultSetTimout;
-	        }
-	    } catch (e) {
-	        cachedSetTimeout = defaultSetTimout;
-	    }
-	    try {
-	        if (typeof clearTimeout === 'function') {
-	            cachedClearTimeout = clearTimeout;
-	        } else {
-	            cachedClearTimeout = defaultClearTimeout;
-	        }
-	    } catch (e) {
-	        cachedClearTimeout = defaultClearTimeout;
-	    }
-	} ())
-	function runTimeout(fun) {
-	    if (cachedSetTimeout === setTimeout) {
-	        //normal enviroments in sane situations
-	        return setTimeout(fun, 0);
-	    }
-	    // if setTimeout wasn't available but was latter defined
-	    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-	        cachedSetTimeout = setTimeout;
-	        return setTimeout(fun, 0);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedSetTimeout(fun, 0);
-	    } catch(e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-	            return cachedSetTimeout.call(null, fun, 0);
-	        } catch(e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-	            return cachedSetTimeout.call(this, fun, 0);
-	        }
-	    }
-
-
-	}
-	function runClearTimeout(marker) {
-	    if (cachedClearTimeout === clearTimeout) {
-	        //normal enviroments in sane situations
-	        return clearTimeout(marker);
-	    }
-	    // if clearTimeout wasn't available but was latter defined
-	    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-	        cachedClearTimeout = clearTimeout;
-	        return clearTimeout(marker);
-	    }
-	    try {
-	        // when when somebody has screwed with setTimeout but no I.E. maddness
-	        return cachedClearTimeout(marker);
-	    } catch (e){
-	        try {
-	            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-	            return cachedClearTimeout.call(null, marker);
-	        } catch (e){
-	            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-	            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-	            return cachedClearTimeout.call(this, marker);
-	        }
-	    }
-
-
-
-	}
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = runTimeout(cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    runClearTimeout(timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        runTimeout(drainQueue);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
+/* 295 */,
 /* 296 */,
 /* 297 */,
 /* 298 */,
@@ -79942,6 +79757,13 @@
 	    this.$state = $state;
 
 	    this.listener = $rootScope.$on('render', function (event, component) {
+
+	      // If need to render template from function
+	      // convert it to string to pass with postMessage to iFrame
+	      if (typeof component.template === 'function') {
+	        component.template = encodeURI(component.template);
+	      }
+
 	      _this.render(event, {
 	        type: 'component',
 	        data: component
@@ -79994,7 +79816,11 @@
 	  }, {
 	    key: 'render',
 	    value: function render(event, data) {
-	      this._bridge.postMessage(data, '*');
+	      try {
+	        this._bridge.postMessage(data, '*');
+	      } catch (e) {
+	        console.log(e);
+	      }
 	    }
 	  }, {
 	    key: 'initDevice',
@@ -80147,7 +79973,7 @@
 /* 371 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"sidebar__header\">\n\t<a href=\"https://github.com/ui-storybook/sb\" target=\"_blank\" class=\"sb-logo\"></a>\n\t<!--<div class=\"sb-logo\"></div>-->\n\t<md-button ng-click=\"vm.sloseSidebar()\" class=\"md-icon-button button__close-sidebar\" md-no-ink aria-label=\"Close sidebar\">\n\t\t<i class=\"material-icons icon__close-sidebar\">arrow_back</i>\n\t</md-button>\n</div>\n<div class=\"search\">\n\t<i class=\"material-icons icon__search\">search</i>\n\t<input type=\"text\" ng-model=\"vm.search\" placeholder=\"Search\" class=\"search__input\">\n</div>\n<md-input-container class=\"md-block section__select\" flex-gt-sm ng-hide=\"vm.search.length\">\n\t<h2>Section</h2>\n\t<md-select aria-label=\"1\" ng-model=\"vm.selectedSection\">\n\t\t<md-option ng-click=\"vm.selectSection(section)\" ng-bind=\"section\" ng-repeat=\"section in vm.sectionsList\" value=\"{{section}}\">\n\t\t\t<span aria-label=\"{{section}}\"></span>\n\t\t</md-option>\n\t</md-select>\n</md-input-container>\n<div class=\"story__list\" ng-repeat=\"(story, components) in vm.stories track by $index\">\n\t<md-subheader ng-class=\"{'active': vm.active.story === story}\" ng-bind=\"story\" class=\"story__name\" ng-hide=\"vm.search.length\"></md-subheader>\n\t<md-list-item class=\"story__point md-2-line\" ng-repeat=\"component in components | filter: { title: vm.search } track by $index\"\n\t\tng-click=\"vm.selectComponentFromList(story, component)\" ng-class=\"{'active': vm.active.point === component.title}\" aria-label=\"{{ vm.active.point }}\">\n\t\t<div class=\"md-list-item-text\" layout=\"column\">\n\t\t\t<h3 class=\"story__list-item\" ng-bind=\"component.title\"></h3>\n\t\t</div>\n\t</md-list-item>\n</div>"
+	module.exports = "<div class=\"sidebar__header\">\n\n\t<div ng-if=\"!vm.searchPanel\" class=\"sidebar__header-main\">\n\t\t<a href=\"https://github.com/ui-storybook/sb\" target=\"_blank\" class=\"sb-logo\"></a>\n\t\t<span flex></span>\n\t\t<button ng-click=\"vm.openSearch()\" class=\"md-icon-button md-button md-ink-ripple\">\n\t\t<i class=\"material-icons icon__search\">search</i>\n\t</button>\n\t\t<md-button ng-click=\"vm.sloseSidebar()\" class=\"md-icon-button button__close-sidebar\" md-no-ink aria-label=\"Close sidebar\">\n\t\t\t<i class=\"material-icons icon__close-sidebar\">arrow_back</i>\n\t\t</md-button>\n\t</div>\n\n\t<div class=\"search\" ng-if=\"vm.searchPanel\">\n\t\t<i class=\"material-icons icon__search\">search</i>\n\t\t<input type=\"text\" ng-model=\"vm.search\" placeholder=\"Search\" class=\"search__input\">\n\t\t<md-button ng-click=\"vm.closeSearch()\" class=\"md-icon-button button__close-sidebar\" md-no-ink aria-label=\"Close sidebar\">\n\t\t\t<i class=\"material-icons icon__close-sidebar\">close</i>\n\t\t</md-button>\n\t</div>\n\n</div>\n<md-input-container class=\"md-block section__select\" flex-gt-sm ng-hide=\"vm.search.length\">\n\t<h2>Section</h2>\n\t<md-select aria-label=\"1\" ng-model=\"vm.selectedSection\">\n\t\t<md-option ng-click=\"vm.selectSection(section)\" ng-bind=\"section\" ng-repeat=\"section in vm.sectionsList\" value=\"{{section}}\">\n\t\t\t<span aria-label=\"{{section}}\"></span>\n\t\t</md-option>\n\t</md-select>\n</md-input-container>\n<md-content>\n\t<section class=\"story__list\" ng-repeat=\"(story, components) in vm.stories track by $index\">\n\t\t<md-subheader ng-class=\"{'active': vm.active.story === story}\" ng-bind=\"story\" class=\"story__name\" ng-hide=\"vm.search.length\"></md-subheader>\n\t\t<md-list-item class=\"story__point md-2-line\" ng-repeat=\"component in components | filter: { title: vm.search } track by $index\"\n\t\t\tng-click=\"vm.selectComponentFromList(story, component)\" ng-class=\"{'active': vm.active.point === component.title}\" aria-label=\"{{ vm.active.point }}\">\n\t\t\t<div class=\"md-list-item-text\" layout=\"column\">\n\t\t\t\t<h3 class=\"story__list-item\" ng-bind=\"component.title\"></h3>\n\t\t\t</div>\n\t\t</md-list-item>\n\t</section>\n</md-content>"
 
 /***/ },
 /* 372 */
@@ -80211,6 +80037,20 @@
 	  }
 
 	  (0, _createClass3.default)(StoryListController, [{
+	    key: 'openSearch',
+	    value: function openSearch() {
+	      this.searchPanel = true;
+	      setTimeout(function () {
+	        return document.getElementsByClassName('search__input')[0].focus();
+	      }, 0);
+	    }
+	  }, {
+	    key: 'closeSearch',
+	    value: function closeSearch() {
+	      this.search = '';
+	      this.searchPanel = false;
+	    }
+	  }, {
 	    key: 'selectSection',
 	    value: function selectSection(sectionTitle) {
 	      this.selectStory(sectionTitle);
@@ -80244,6 +80084,8 @@
 	        inherit: false,
 	        notify: false
 	      });
+
+	      this.closeSearch();
 
 	      this.$rootScope.$broadcast('render', component);
 	    }
@@ -80569,7 +80411,7 @@
 
 
 	// module
-	exports.push([module.id, ".sidebar__header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.search {\n  display: flex;\n  align-items: center;\n  padding-left: 13px;\n}\n.search .icon__search {\n  color: #444;\n  opacity: 0.5;\n}\n.search .search__input {\n  width: 100%;\n  height: 60px;\n  border: none;\n  padding: 0 10px;\n  outline: none;\n}\n.story__name {\n  font-size: 14px;\n  font-weight: 500;\n  color: rgba(0, 0, 0, 0.54);\n  letter-spacing: 0px;\n  padding: 16px;\n  background: #fff;\n}\n.story__point {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  outline: none;\n  height: 48px !important;\n  min-height: 48px !important;\n}\n.story__point .md-button {\n  padding-left: 32px !important;\n  min-height: 48px !important;\n  height: 48px !important;\n}\n.story__point.active {\n  color: #448aff;\n}\n.story__list-item {\n  font-size: 14px !important;\n}\n.button__close-sidebar {\n  margin-right: 16px;\n  color: rgba(0, 0, 0, 0.54);\n}\n.section__select {\n  padding: 0 16px;\n}\n.section__select h2 {\n  font-size: 16px;\n  font-weight: 500;\n  color: rgba(0, 0, 0, 0.54);\n  margin: 8px 0;\n}\n.section__select md-select {\n  display: inline-block;\n}\n.section__select span {\n  color: rgba(0, 0, 0, 0.54);\n  text-transform: capitalize;\n}\n.sb-logo {\n  width: 65px;\n  height: 60px;\n  background-size: 40px;\n  background-repeat: no-repeat;\n  background-position: 50%;\n  background-image: url(data:image/png;base64,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);\n}\n", ""]);
+	exports.push([module.id, "story-list {\n  overflow: hidden;\n  display: flex;\n  flex-direction: column;\n}\n.sidebar__header {\n  align-items: center;\n  justify-content: space-between;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n.sidebar__header-main {\n  display: flex;\n  align-items: center;\n  width: 100%;\n}\n.icon__search {\n  color: rgba(0, 0, 0, 0.54);\n}\n.search {\n  display: flex;\n  align-items: center;\n  padding-left: 13px;\n}\n.search .search__input {\n  width: 210px;\n  height: 60px;\n  border: none;\n  padding: 0 10px;\n  outline: none;\n}\n.story__name {\n  font-size: 14px;\n  font-weight: 500;\n  color: #448aff;\n  letter-spacing: 0px;\n  padding: 16px;\n  background: #fff;\n}\n.story__point {\n  cursor: pointer;\n  color: rgba(0, 0, 0, 0.54);\n  outline: none;\n  height: 48px !important;\n  min-height: 48px !important;\n}\n.story__point .md-button {\n  padding-left: 32px !important;\n  min-height: 48px !important;\n  height: 48px !important;\n}\n.story__point.active {\n  color: #448aff;\n}\n.story__list {\n  overflow: scroll;\n}\n.story__list .story__list-item {\n  font-size: 14px !important;\n}\n.button__close-sidebar {\n  margin-right: 16px;\n  color: rgba(0, 0, 0, 0.54);\n}\n.section__select {\n  padding: 0 16px;\n}\n.section__select h2 {\n  font-size: 16px;\n  font-weight: 500;\n  color: rgba(0, 0, 0, 0.54);\n  margin: 8px 0;\n}\n.section__select md-select {\n  display: inline-block;\n}\n.section__select span {\n  color: rgba(0, 0, 0, 0.54);\n  text-transform: capitalize;\n}\n.md-subheader-wrapper:not(.md-sticky-no-effect)[sticky-state=active] {\n  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px;\n}\n.sb-logo {\n  width: 65px;\n  height: 60px;\n  background-size: 40px;\n  background-repeat: no-repeat;\n  background-position: 50%;\n  background-image: url(data:image/png;base64,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);\n}\n", ""]);
 
 	// exports
 
@@ -80615,7 +80457,7 @@
 /* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -80640,7 +80482,7 @@
 
 	    this.$rootScope = $rootScope;
 
-	    if (process && process.env && process.env.TYPE === 'react') {
+	    if (window.sbtype === 'react') {
 	      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
 	    } else {
 
@@ -80709,19 +80551,13 @@
 
 	      this.renderError = false;
 
-	      // We need original template for prevent changes
-	      // So store original component
-	      this.originalComponent = component;
-
-	      // Store copy of component
-	      this.component = angular.copy(component);
+	      this.component = component;
 	    }
 	  }]);
 	  return TemplateController;
 	}();
 
 	exports.default = TemplateController;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(295)))
 
 /***/ },
 /* 398 */
@@ -80832,19 +80668,25 @@
 
 	    this.$parse = $parse;
 
-	    // Listen for new component data and render it
-	    this.listener = $rootScope.$on('render', function (event, component) {
-	      _this.render(event, component);
-	    });
+	    if (window.sbtype === 'react') {
+	      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
+	    } else {
 
-	    // ACE editor settings
-	    this.settings = {
-	      mode: 'json',
-	      useWrapMode: true,
-	      onLoad: this.onEditorChange.bind(this)
-	    };
-	    this.$rootScope = $rootScope;
-	    this.inFirst = true;
+	      // Listen for new component data and render it
+	      this.listener = $rootScope.$on('render', function (event, component) {
+	        _this.render(event, component);
+	      });
+
+	      // ACE editor settings
+	      this.settings = {
+	        mode: 'json',
+	        useWrapMode: true,
+	        onLoad: this.onEditorChange.bind(this)
+	      };
+	      this.$rootScope = $rootScope;
+	      this.inFirst = true;
+	      this.errorMessage = 'Unable to load your model. Please double check it.';
+	    }
 	  }
 
 	  (0, _createClass3.default)(ModelController, [{
