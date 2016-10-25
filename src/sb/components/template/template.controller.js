@@ -3,7 +3,7 @@ class TemplateController {
 
     this.$rootScope = $rootScope;
 
-    if (process && process.env && process.env.TYPE === 'react') {
+    if (window.sbtype === 'react') {
       this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
     } else {
       
@@ -67,12 +67,7 @@ class TemplateController {
 
     this.renderError = false;
 
-    // We need original template for prevent changes
-    // So store original component
-    this.originalComponent = component;
-
-    // Store copy of component
-    this.component = angular.copy(component);
+    this.component = component;
   }
 
 }

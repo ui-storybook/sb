@@ -1,7 +1,7 @@
 import {
   devicesSize,
   devices
-}  from './devices';
+} from './devices';
 
 class PreviewController {
 
@@ -10,6 +10,13 @@ class PreviewController {
     this.$state = $state;
 
     this.listener = $rootScope.$on('render', (event, component) => {
+      
+      // If need to render template from function
+      // convert it to string to pass with postMessage to iFrame
+      if (typeof component.template === 'function') {
+        component.template = encodeURI(component.template);
+      }
+
       this.render(event, {
         type: 'component',
         data: component
@@ -59,7 +66,11 @@ class PreviewController {
   }
 
   render(event, data) {
-    this._bridge.postMessage(data, '*');
+    try {
+      this._bridge.postMessage(data, '*');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   initDevice() {

@@ -2,19 +2,26 @@ class ModelController {
   constructor($rootScope, $parse) {
     this.$parse = $parse;
 
-    // Listen for new component data and render it
-    this.listener = $rootScope.$on('render', (event, component) => {
-      this.render(event, component);
-    });
+    if (window.sbtype === 'react') {
+      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
+    } else {
 
-    // ACE editor settings
-    this.settings = {
-      mode: 'json',
-      useWrapMode: true,
-      onLoad: this.onEditorChange.bind(this)
+      // Listen for new component data and render it
+      this.listener = $rootScope.$on('render', (event, component) => {
+        this.render(event, component);
+      });
+
+      // ACE editor settings
+      this.settings = {
+        mode: 'json',
+        useWrapMode: true,
+        onLoad: this.onEditorChange.bind(this)
+      }
+      this.$rootScope = $rootScope;
+      this.inFirst = true;
+      this.errorMessage = 'Unable to load your model. Please double check it.';
     }
-    this.$rootScope = $rootScope;
-    this.inFirst = true;
+
   }
 
   $onDestroy() {
