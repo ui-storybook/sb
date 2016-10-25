@@ -5,7 +5,8 @@ class HelperController {
 
         // Allowed events from parrent iFrame
         this.events = {
-            'component': this.loadComponent
+            'component': this.loadComponent,
+            'model': this.loadModel
         }
     }
 
@@ -23,6 +24,15 @@ class HelperController {
 
     $onDestroy() {
         this.postMessageListener();
+    }
+
+    loadModel(model) {
+        if (model) {
+            for (let k in model) {
+                this[k] = model[k];
+            }
+        }
+        this.$scope.$apply();
     }
 
     loadComponent(component) {
