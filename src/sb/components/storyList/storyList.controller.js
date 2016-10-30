@@ -14,6 +14,18 @@ class StoryListController {
       this.$scope.$apply();
     });
 
+    sb.registerReloadCB(() => {
+      this.initStories();
+      this.$scope.$apply();
+    });
+
+    this.initStories();
+
+    this.$mdSidenav('left').open();
+
+  }
+
+  initStories() {
     // Get all section
     this.sections = sb.getSections();
 
@@ -24,13 +36,10 @@ class StoryListController {
     this.stories = {};
 
     // Active story point
-    this.active = {};
+    this.active = this.active ? this.active : {};
 
     // Select story
     this.selectStory();
-
-    this.$mdSidenav('left').open();
-
   }
 
   openSearch() {

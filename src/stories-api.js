@@ -37,6 +37,10 @@ class StoriesAPI {
         this.contactCB = cb;
     }
 
+    registerReloadCB(cb) {
+        this.reloadCB = cb;
+    }
+
     contact() {
         this.contactCB();
     }
@@ -48,10 +52,17 @@ class StoriesAPI {
             console.log(e);
         }
     }
-    
+
     updateStory(sbObject, data) {
         let storyPoint = this.getStory(sbObject);
         storyPoint = data;
+    }
+
+    reload() {
+        if (this.reloadCB) {
+            this.sections = {};
+            setTimeout(() => this.reloadCB, 0);
+        }
     }
 
 }
