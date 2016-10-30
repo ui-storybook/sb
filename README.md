@@ -1,7 +1,7 @@
 # SB [![npm version](https://badge.fury.io/js/ui-storybook.svg)](https://badge.fury.io/js/ui-storybook)
 
 SB is the **environment** for developers that allow to easily develop and support UI components with any framework.  
-SB is the **tool** for designers that allows to easily review and test UI components that developers made.  
+SB is the **tool** for designers that allow easily review and test UI components maiden by developers.  
 SB is the **storybook** for teams and companies that helped him to keep UI consistent and documented.  
 
 ![SB demo image](docs/sb-demo.gif)
@@ -11,13 +11,13 @@ See the demo with [angular material](https://material.angularjs.org/latest/) car
 And demo repository — [Demo repository](https://github.com/ui-storybook/sb-angular-material-cards-demo)
 
 ### What is supported now?
-Basically SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
+Basically, SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
 For now SB support only Angular 1.x. Support for NG2, React, Aurelia and Vue.js coming very soon.
 
 
 
 ### Getting started
-Fasted way to add SB to your project is use [sb-cli](https://github.com/ui-storybook/sb-cli):  
+Fastest way to add SB to your project is to use [sb-cli](https://github.com/ui-storybook/sb-cli):  
 
 ```bash
 # Installation
@@ -43,7 +43,7 @@ npm run sb-publish
 ```
 
 #### Powered your project
-First you need to import your main project module to `sb/index.js`  
+First, you need to import your main project module to `sb/index.js`  
 For `Angular` based app:
 
 ```js
@@ -59,7 +59,7 @@ const mainModule = angular.module('sb', [
 ```
 
 Write your stories  
-SB provide simple api for you:
+SB provides simple api for you:
 
 ```js
 // File sb/stories/index.js
@@ -91,7 +91,7 @@ Run SB in browser or load it to GitHub Pages
 `npm run sb-publish` — will build and load SB to GitHub Pages.
 
 #### Configuration 
-SB use Webpack to build everything. If you need to change ot update build process go to `sb/.webpack` folder:
+SB use Webpack to build everything. If you need to change or update build process go to `sb/.webpack` folder:
 `server.js` include configuration for browser-sync and webpack HMR.  
 `loaders.js` include all loaders.  
 `webpack.dev.babel.js` include dev build configuration.   
