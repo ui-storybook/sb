@@ -11,6 +11,14 @@ See the demo with [angular material](https://material.angularjs.org/latest/) car
 And demo repository — [Demo repository](https://github.com/ui-storybook/sb-angular-material-cards-demo)
 
 ### What is supported now?
+| Framework     | Support    |
+| ------------- |:-------------:|
+| Angular 1     | YES           |
+| React         | YES           |
+| NG2           | Comming soon  |
+| Aurelia       | Comming soon  |
+| Vue.js        | Comming soon  |
+
 Basically, SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
 For now SB support Angular 1.x and React. Support for NG2, Aurelia and Vue.js coming very soon.
 
