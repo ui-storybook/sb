@@ -1,8 +1,9 @@
 class ModelController {
   constructor($rootScope, $parse) {
     this.$parse = $parse;
-
+    console.log(window.sbtype);
     if (window.sbtype === 'react') {
+      this.renderError = true;
       this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
     } else {
 
@@ -19,7 +20,7 @@ class ModelController {
       }
       this.$rootScope = $rootScope;
       this.inFirst = true;
-      this.errorMessage = 'Unable to load your model. Please double check it.';
+      
     }
 
   }
