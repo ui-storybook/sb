@@ -18,7 +18,8 @@ class StoriesAPI {
                 if (!section[storyName]) {
                     section[storyName] = [];
                 }
-                section[storyName].push({ title, template, model });
+                const id = Math.random().toString(36).substr(2, 9);
+                section[storyName].push({ title, template, model, id });
                 return storyAPI;
             }
             return storyAPI;
@@ -38,6 +39,14 @@ class StoriesAPI {
 
     contact() {
         this.contactCB();
+    }
+
+    getStory(sbObject) {
+        try {
+            return this.sections[sbObject.section][sbObject.story].find(i => i.id === sbObject.id)
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 }
