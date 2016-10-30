@@ -76,7 +76,15 @@ class StoryListController {
 
     this.closeSearch();
 
-    this.$rootScope.$broadcast('render', component);
+    this.$rootScope.$broadcast('render', {
+      component,
+      sbObject: {
+        id: component.id,
+        story,
+        point: component.title,
+        section: this.selectedSection
+      }
+    });
   }
 
   selectComponent(force) {
@@ -110,7 +118,15 @@ class StoryListController {
       notify: false
     });
 
-    this.$rootScope.$broadcast('render', component);
+    this.$rootScope.$broadcast('render', {
+      component,
+      sbObject: {
+        id: component.id,
+        story: storyTitle,
+        point: component.title,
+        section: this.selectedSection
+      }
+    });
 
   }
 

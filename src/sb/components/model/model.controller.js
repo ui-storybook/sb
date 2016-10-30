@@ -7,8 +7,8 @@ class ModelController {
     } else {
 
       // Listen for new component data and render it
-      this.listener = $rootScope.$on('render', (event, component) => {
-        this.render(event, component);
+      this.listener = $rootScope.$on('render', (event, entity) => {
+        this.render(event, entity.component);
       });
 
       // ACE editor settings
@@ -49,7 +49,8 @@ class ModelController {
     // Try to render new molel 
     try {
       let v = JSON.parse(model);
-      this.$rootScope.$broadcast('model', v);
+      this.component.model = v; 
+      this.$rootScope.$broadcast('updateComponent', this.component);
     } catch (e) { }
   }
 
@@ -58,6 +59,7 @@ class ModelController {
     // We need original template for prevent changes
     // So store original component
     this.originalComponent = component;
+    this.component = component;
 
     try {
       // Store model 

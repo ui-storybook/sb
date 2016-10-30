@@ -5,36 +5,21 @@ import {
 
 class PreviewController {
 
-  constructor($rootScope, $scope, $state) {
+  constructor($rootScope, $scope, $state, $stateParams) {
 
     this.$state = $state;
+    this.$stateParams = $stateParams;
 
-    this.listener = $rootScope.$on('render', (event, component) => {
-      
-      // If need to render template from function
-      // convert it to string to pass with postMessage to iFrame
-      if (typeof component.template === 'function') {
-        component.template = encodeURI(component.template);
-      }
-
+    this.listener = $rootScope.$on('render', (event, entity) => {
+      this.setDocumentTitle(entity.sbObject.point);
       this.render(event, {
         type: 'component',
-        data: component
+        data: entity.sbObject
       });
     });
 
-    this.templateListener = $rootScope.$on('template', (event, component) => {
-      this.render(event, {
-        type: 'component',
-        data: component
-      });
-    });
-
-    this.modelListener = $rootScope.$on('model', (event, model) => {
-      this.render(event, {
-        type: 'model',
-        data: model
-      });
+    this.templateListener = $rootScope.$on('updateComponent', (event, component) => {
+      this.updateSBComponent(component);
     });
 
     this.devices = devices;
@@ -87,6 +72,19 @@ class PreviewController {
     }
   }
 
+  updateSBComponent(component, type) {
+    let params = {
+      section: this.$stateParams.section,
+      story: this.$stateParams.story,
+      id: component.id
+    };
+    window.sb.updateStory(params, component);
+    this.render(event, {
+      type: 'component',
+      data: params
+    });     
+  }
+
   selectDevice(device) {
     let params = this.$state.params;
     params.device = device;
@@ -97,6 +95,10 @@ class PreviewController {
       notify: false
     });
     this.dynamicSize = this.devicesSize[device];
+  }
+
+  setDocumentTitle(title) {
+    document.title = `${title} — SB`;
   }
 
 }

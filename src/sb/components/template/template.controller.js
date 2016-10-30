@@ -8,8 +8,8 @@ class TemplateController {
     } else {
       
       // Listen for new component data and render it
-      this.listener = $rootScope.$on('render', (event, component) => {
-        this.render(event, component);
+      this.listener = $rootScope.$on('render', (event, entity) => {
+        this.render(event, entity.component);
       });
 
       // ACE editor settings
@@ -52,7 +52,7 @@ class TemplateController {
 
     // Try to render new template 
     try {
-      this.$rootScope.$broadcast('template', this.component);
+      this.$rootScope.$broadcast('updateComponent', this.component);
     } catch (e) {
       console.log(`Can't render template: ${e}`)
     }
