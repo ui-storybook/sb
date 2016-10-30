@@ -80698,7 +80698,7 @@
 	    (0, _classCallCheck3.default)(this, ModelController);
 
 	    this.$parse = $parse;
-	    console.log(window.sbtype);
+
 	    if (window.sbtype === 'react') {
 	      this.renderError = true;
 	      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
