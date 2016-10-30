@@ -881,7 +881,7 @@
 
 	            // Register lissener for render new component
 	            this.postMessageListener = window.addEventListener('message', function (event) {
-	                event.data && _this.events[event.data.type].call(_this, event.data.data);
+	                event.data && _this.events[event.data.type].call(_this, event.data);
 	            }, false);
 	        }
 	    }, {
@@ -901,7 +901,8 @@
 	        }
 	    }, {
 	        key: 'loadComponent',
-	        value: function loadComponent(component) {
+	        value: function loadComponent(entity) {
+	            var component = window.parent.sb.getStory(entity.data);
 	            this.template = component.template;
 	            if (component.model) {
 	                for (var k in component.model) {

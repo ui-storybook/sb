@@ -79748,40 +79748,25 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var PreviewController = function () {
-	  function PreviewController($rootScope, $scope, $state) {
+	  function PreviewController($rootScope, $scope, $state, $stateParams) {
 	    var _this = this;
 
 	    (0, _classCallCheck3.default)(this, PreviewController);
 
 
 	    this.$state = $state;
+	    this.$stateParams = $stateParams;
 
-	    this.listener = $rootScope.$on('render', function (event, component) {
-
-	      // If need to render template from function
-	      // convert it to string to pass with postMessage to iFrame
-	      if (typeof component.template === 'function') {
-	        component.template = encodeURI(component.template);
-	      }
-
+	    this.listener = $rootScope.$on('render', function (event, entity) {
+	      _this.setDocumentTitle(entity.sbObject.point);
 	      _this.render(event, {
 	        type: 'component',
-	        data: component
+	        data: entity.sbObject
 	      });
 	    });
 
-	    this.templateListener = $rootScope.$on('template', function (event, component) {
-	      _this.render(event, {
-	        type: 'component',
-	        data: component
-	      });
-	    });
-
-	    this.modelListener = $rootScope.$on('model', function (event, model) {
-	      _this.render(event, {
-	        type: 'model',
-	        data: model
-	      });
+	    this.templateListener = $rootScope.$on('updateComponent', function (event, component) {
+	      _this.updateSBComponent(component);
 	    });
 
 	    this.devices = _devices.devices;
@@ -79838,6 +79823,20 @@
 	      }
 	    }
 	  }, {
+	    key: 'updateSBComponent',
+	    value: function updateSBComponent(component, type) {
+	      var params = {
+	        section: this.$stateParams.section,
+	        story: this.$stateParams.story,
+	        id: component.id
+	      };
+	      window.sb.updateStory(params, component);
+	      this.render(event, {
+	        type: 'component',
+	        data: params
+	      });
+	    }
+	  }, {
 	    key: 'selectDevice',
 	    value: function selectDevice(device) {
 	      var params = this.$state.params;
@@ -79849,6 +79848,11 @@
 	        notify: false
 	      });
 	      this.dynamicSize = this.devicesSize[device];
+	    }
+	  }, {
+	    key: 'setDocumentTitle',
+	    value: function setDocumentTitle(title) {
+	      document.title = title + ' — SB';
 	    }
 	  }]);
 	  return PreviewController;
@@ -80087,7 +80091,15 @@
 
 	      this.closeSearch();
 
-	      this.$rootScope.$broadcast('render', component);
+	      this.$rootScope.$broadcast('render', {
+	        component: component,
+	        sbObject: {
+	          id: component.id,
+	          story: story,
+	          point: component.title,
+	          section: this.selectedSection
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'selectComponent',
@@ -80127,7 +80139,15 @@
 	        notify: false
 	      });
 
-	      this.$rootScope.$broadcast('render', component);
+	      this.$rootScope.$broadcast('render', {
+	        component: component,
+	        sbObject: {
+	          id: component.id,
+	          story: storyTitle,
+	          point: component.title,
+	          section: this.selectedSection
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'sloseSidebar',
@@ -80487,8 +80507,8 @@
 	    } else {
 
 	      // Listen for new component data and render it
-	      this.listener = $rootScope.$on('render', function (event, component) {
-	        _this.render(event, component);
+	      this.listener = $rootScope.$on('render', function (event, entity) {
+	        _this.render(event, entity.component);
 	      });
 
 	      // ACE editor settings
@@ -80535,7 +80555,7 @@
 
 	      // Try to render new template 
 	      try {
-	        this.$rootScope.$broadcast('template', this.component);
+	        this.$rootScope.$broadcast('updateComponent', this.component);
 	      } catch (e) {
 	        console.log('Can\'t render template: ' + e);
 	      }
@@ -80673,8 +80693,8 @@
 	    } else {
 
 	      // Listen for new component data and render it
-	      this.listener = $rootScope.$on('render', function (event, component) {
-	        _this.render(event, component);
+	      this.listener = $rootScope.$on('render', function (event, entity) {
+	        _this.render(event, entity.component);
 	      });
 
 	      // ACE editor settings
@@ -80720,7 +80740,8 @@
 	      // Try to render new molel 
 	      try {
 	        var v = JSON.parse(model);
-	        this.$rootScope.$broadcast('model', v);
+	        this.component.model = v;
+	        this.$rootScope.$broadcast('updateComponent', this.component);
 	      } catch (e) {}
 	    }
 	  }, {
@@ -80730,6 +80751,7 @@
 	      // We need original template for prevent changes
 	      // So store original component
 	      this.originalComponent = component;
+	      this.component = component;
 
 	      try {
 	        // Store model 

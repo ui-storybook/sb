@@ -419,7 +419,8 @@
 	                    if (!section[storyName]) {
 	                        section[storyName] = [];
 	                    }
-	                    section[storyName].push({ title: title, template: template, model: model });
+	                    var id = Math.random().toString(36).substr(2, 9);
+	                    section[storyName].push({ title: title, template: template, model: model, id: id });
 	                    return storyAPI;
 	                };
 	                return storyAPI;
@@ -441,6 +442,23 @@
 	        key: "contact",
 	        value: function contact() {
 	            this.contactCB();
+	        }
+	    }, {
+	        key: "getStory",
+	        value: function getStory(sbObject) {
+	            try {
+	                return this.sections[sbObject.section][sbObject.story].find(function (i) {
+	                    return i.id === sbObject.id;
+	                });
+	            } catch (e) {
+	                console.log(e);
+	            }
+	        }
+	    }, {
+	        key: "updateStory",
+	        value: function updateStory(sbObject, data) {
+	            var storyPoint = this.getStory(sbObject);
+	            storyPoint = data;
 	        }
 	    }]);
 	    return StoriesAPI;
