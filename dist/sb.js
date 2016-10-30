@@ -80022,25 +80022,35 @@
 	      _this.$scope.$apply();
 	    });
 
-	    // Get all section
-	    this.sections = sb.getSections();
+	    sb.registerReloadCB(function () {
+	      _this.initStories();
+	      _this.$scope.$apply();
+	    });
 
-	    // List of avaliable sections
-	    this.sectionsList = (0, _keys2.default)(this.sections);
-
-	    // Active stories 
-	    this.stories = {};
-
-	    // Active story point
-	    this.active = {};
-
-	    // Select story
-	    this.selectStory();
+	    this.initStories();
 
 	    this.$mdSidenav('left').open();
 	  }
 
 	  (0, _createClass3.default)(StoryListController, [{
+	    key: 'initStories',
+	    value: function initStories() {
+	      // Get all section
+	      this.sections = sb.getSections();
+
+	      // List of avaliable sections
+	      this.sectionsList = (0, _keys2.default)(this.sections);
+
+	      // Active stories 
+	      this.stories = {};
+
+	      // Active story point
+	      this.active = this.active ? this.active : {};
+
+	      // Select story
+	      this.selectStory();
+	    }
+	  }, {
 	    key: 'openSearch',
 	    value: function openSearch() {
 	      this.searchPanel = true;

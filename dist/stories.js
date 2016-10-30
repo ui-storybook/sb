@@ -439,6 +439,11 @@
 	            this.contactCB = cb;
 	        }
 	    }, {
+	        key: "registerReloadCB",
+	        value: function registerReloadCB(cb) {
+	            this.reloadCB = cb;
+	        }
+	    }, {
 	        key: "contact",
 	        value: function contact() {
 	            this.contactCB();
@@ -459,6 +464,18 @@
 	        value: function updateStory(sbObject, data) {
 	            var storyPoint = this.getStory(sbObject);
 	            storyPoint = data;
+	        }
+	    }, {
+	        key: "reload",
+	        value: function reload() {
+	            var _this2 = this;
+
+	            if (this.reloadCB) {
+	                this.sections = {};
+	                setTimeout(function () {
+	                    return _this2.reloadCB;
+	                }, 0);
+	            }
 	        }
 	    }]);
 	    return StoriesAPI;
