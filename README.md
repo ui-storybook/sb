@@ -12,7 +12,7 @@ And demo repository — [Demo repository](https://github.com/ui-storybook/sb-ang
 
 ### What is supported now?
 Basically, SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
-For now SB support only Angular 1.x. Support for NG2, React, Aurelia and Vue.js coming very soon.
+For now SB support Angular 1.x and React. Support for NG2, Aurelia and Vue.js coming very soon.
 
 
 
