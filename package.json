@@ -1,6 +1,6 @@
 {
   "name": "ui-storybook",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "SB is the environment for developers that allow to esaly develop and support UI components with any framework.",
   "main": "index.js",
   "types": "./src/sb.d.ts",
