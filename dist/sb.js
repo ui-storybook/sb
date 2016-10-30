@@ -80481,7 +80481,7 @@
 /* 396 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.component.template\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex ng-bing=\"vm.errorMessage\"></div>"
+	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.component.template\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex ng-bind=\"vm.errorMessage\"></div>"
 
 /***/ },
 /* 397 */
@@ -80513,6 +80513,7 @@
 	    this.$rootScope = $rootScope;
 
 	    if (window.sbtype === 'react') {
+	      this.renderError = true;
 	      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
 	    } else {
 
@@ -80664,7 +80665,7 @@
 /* 401 */
 /***/ function(module, exports) {
 
-	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.model\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex>\n    Unable to load the model. Are you pass correct object?\n</div>"
+	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.model\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex ng-bind=\"vm.errorMessage\"></div>"
 
 /***/ },
 /* 402 */
@@ -80697,8 +80698,9 @@
 	    (0, _classCallCheck3.default)(this, ModelController);
 
 	    this.$parse = $parse;
-
+	    console.log(window.sbtype);
 	    if (window.sbtype === 'react') {
+	      this.renderError = true;
 	      this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
 	    } else {
 
@@ -80715,7 +80717,6 @@
 	      };
 	      this.$rootScope = $rootScope;
 	      this.inFirst = true;
-	      this.errorMessage = 'Unable to load your model. Please double check it.';
 	    }
 	  }
 

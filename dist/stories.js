@@ -473,7 +473,7 @@
 	            if (this.reloadCB) {
 	                this.sections = {};
 	                setTimeout(function () {
-	                    return _this2.reloadCB;
+	                    return _this2.reloadCB();
 	                }, 0);
 	            }
 	        }
