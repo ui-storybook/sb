@@ -48,6 +48,11 @@ class StoriesAPI {
             console.log(e);
         }
     }
+    
+    updateStory(sbObject, data) {
+        let storyPoint = this.getStory(sbObject);
+        storyPoint = data;
+    }
 
 }
 
