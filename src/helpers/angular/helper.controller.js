@@ -17,7 +17,7 @@ class HelperController {
 
         // Register lissener for render new component
         this.postMessageListener = window.addEventListener('message', event => {
-            event.data && this.events[event.data.type].call(this, event.data.data);
+            event.data && this.events[event.data.type].call(this, event.data);
         }, false);
 
     }
@@ -35,7 +35,8 @@ class HelperController {
         this.$scope.$apply();
     }
 
-    loadComponent(component) {
+    loadComponent(entity) {
+        let component = window.parent.sb.getStory(entity.data);
         this.template = component.template;
         if (component.model) {
             for (let k in component.model) {
