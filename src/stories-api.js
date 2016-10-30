@@ -61,7 +61,7 @@ class StoriesAPI {
     reload() {
         if (this.reloadCB) {
             this.sections = {};
-            setTimeout(() => this.reloadCB, 0);
+            setTimeout(() => this.reloadCB(), 0);
         }
     }
 
