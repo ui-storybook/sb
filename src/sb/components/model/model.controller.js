@@ -1,7 +1,7 @@
 class ModelController {
   constructor($rootScope, $parse) {
     this.$parse = $parse;
-    console.log(window.sbtype);
+
     if (window.sbtype === 'react') {
       this.renderError = true;
       this.errorMessage = 'Sorry but for now SB not support live component editor for React. We work on this. Stay tuned!';
@@ -32,7 +32,7 @@ class ModelController {
   onEditorChange(editor) {
     editor.$blockScrolling = Infinity;
     let session = editor.getSession();
-
+    
     // On editor change try to load new component
     session.on("change", (e) => {
       this.broadcastModel(session.getValue());
