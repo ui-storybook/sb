@@ -50,7 +50,7 @@ npm run sb-publish
 ```
 
 #### Angular usage
-First, you need to import your main project module to `sb/index.js`  
+First you need to import your main project module to `sb/index.js`  
 
 ```js
 // Import you app 
