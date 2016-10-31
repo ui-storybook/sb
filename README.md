@@ -11,13 +11,11 @@ See the demo with [angular material](https://material.angularjs.org/latest/) car
 And demo repository — [Demo repository](https://github.com/ui-storybook/sb-angular-material-cards-demo)
 
 ### What is supported now?
-| Framework     | Support    |
-| ------------- |:-------------:|
-| Angular 1     | YES           |
-| React         | YES           |
-| NG2           | Comming soon  |
-| Aurelia       | Comming soon  |
-| Vue.js        | Comming soon  |
+Angular 1 — [API](#angular-usage)         
+React — [API](#react-usage)         
+NG2 — Comming soon  
+Aurelia — Comming soon  
+Vue.js — Comming soon  
 
 Basically, SB was designed for support any frameworks and libraries. All you components run in isolated scope with that version of framework or library that you need.  
 For now SB support Angular 1.x and React. Support for NG2, Aurelia and Vue.js coming very soon.
@@ -50,15 +48,14 @@ npm run sb-build
 npm run sb-publish
 ```
 
-#### Powered your project
+#### Angular usage
 First, you need to import your main project module to `sb/index.js`  
-For `Angular` based app:
 
 ```js
-
+// Import you app 
 import '../path/to/your/module';
  
-// Inject you app module here 
+// And inject it here 
 const mainModule = angular.module('sb', [
   'helper',
   'youAppName'
@@ -71,9 +68,6 @@ SB provides simple api for you:
 
 ```js
 // File sb/stories/index.js
-
-import 'ui-storybook/sb';
-import 'ui-storybook/stories';
 
 // Create a new section (like page)
 let buttons = sb.section('Buttons');
@@ -94,9 +88,38 @@ buttons.story('Simple buttons')
 
 ``` 
 
-Run SB in browser or load it to GitHub Pages  
-`npm run sb` — will load SB server with livereload which allow you to easily develop UI components.  
-`npm run sb-publish` — will build and load SB to GitHub Pages.
+Than simply run `npm run sb` — this will load server with hotreload and run SB with your application.  
+
+#### React usage
+First you need to import your React components in `sb/index.js` file  
+
+```js
+// Example from demo application  
+import { Welcome } from './welcome/welcome';
+```
+
+The write your stories  
+SB provides simple api for you:
+
+```js
+// File sb/stories/index.js
+
+// You need import your commponent here too
+import { Welcome } from './../welcome/welcome';
+
+// Create a new section (like page)
+let overview = sb.section('Welcome section');
+
+// Then you can add new story and states to section
+// add method create new state for story 
+// first param take title of state
+// second take function that return Raact component 
+overview.story('SB demo component')
+  .add('Hello messages', () => (<Welcome />));
+``` 
+
+Than simply run `npm run sb` — this will load server with hotreload and run SB with your application.
+
 
 #### Configuration 
 SB use Webpack to build everything. If you need to change or update build process go to `sb/.webpack` folder:
