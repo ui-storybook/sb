@@ -1,4 +1,5 @@
-# SB [![npm version](https://badge.fury.io/js/ui-storybook.svg)](https://badge.fury.io/js/ui-storybook) ![](https://ga-beacon.appspot.com/UA-86582606-1/github-sb)
+# SB [![npm version](https://badge.fury.io/js/ui-storybook.svg)](https://badge.fury.io/js/ui-storybook) [![Gitter Chat](https://badges.gitter.im/owner/repo.png)](https://gitter.im/ui-sb/Lobby)
+
 
 SB is the **environment** for developers that allow to easily develop and support UI components with any framework.  
 SB is the **tool** for designers that allow easily review and test UI components maiden by developers.  
