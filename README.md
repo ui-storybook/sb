@@ -88,6 +88,29 @@ buttons.story('Simple buttons')
     });
 
 ``` 
+Also you can use `sb.mock` nethod for stote your mocks and then use in stories passing mock name instead of object:
+```js
+sb.mock('week', {
+    sunday: 'Sunday', 
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday'
+});
+
+let calendar = sb.section('Week');
+calendar.story('Days of the week')
+  .add('Sunday', '<p>{{ vm.sunday }}</p>', 'week')
+  .add('Monday', '<p>{{ vm.monday }}</p>', 'week')
+  .add('Tuesday', '<p>{{ vm.tuesday }}</p>', 'week')
+  .add('Wednesday', '<p>{{ vm.wednesday }}</p>', 'week')
+  .add('Thursday', '<p>{{ vm.thursday }}</p>', 'week')
+  .add('Friday', '<p>{{ vm.friday }}</p>', 'week')
+  .add('Saturday', '<p>{{ vm.saturday }}</p>', 'week');
+``` 
+
 
 Than simply run `npm run sb` — this will load server with hotreload and run SB with your application.  
 
