@@ -88,7 +88,7 @@ buttons.story('Simple buttons')
     });
 
 ``` 
-Also you can use `sb.mock` nethod for stote your mocks and then use in stories passing mock name instead of object:
+Also you can use `sb.mock` method for stote your mocks and then use in stories passing mock name instead of object:
 ```js
 sb.mock('week', {
     sunday: 'Sunday', 
