@@ -5,7 +5,7 @@ import storyListComponent from './storyList/storyList.component';
 import templateComponent from './template/template.component';
 import modelComponent from './model/model.component'
 
-const module = angular.module('asb.components', ['ui.router',]);
+const module = angular.module('sb.components', ['ui.router',]);
 
 module.component('preview', previewComponent);
 module.component('storyList', storyListComponent);

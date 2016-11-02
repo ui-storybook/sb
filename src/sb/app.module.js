@@ -6,11 +6,11 @@ import modules from './modules/modules.module';
 import components from './components/components.module';
 import directives from './directives/directives.module';
 
-angular.module('asb', [
-    'asb.core',
-    'asb.modules',
-    'asb.directives',
-    'asb.components',
-    'asb.directives',
-    'asb.services'
+angular.module('sb', [
+    'sb.core',
+    'sb.modules',
+    'sb.directives',
+    'sb.components',
+    'sb.directives',
+    'sb.services'
 ]);

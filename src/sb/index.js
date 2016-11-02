@@ -9,5 +9,5 @@ let element = document.getElementById('asb__main');
 angular
     .element(element)
     .ready(() => {
-        angular.bootstrap(element, ['asb'], { strictDi: false });
+        angular.bootstrap(element, ['sb'], { strictDi: false });
     });
