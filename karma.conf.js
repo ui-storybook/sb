@@ -1,14 +1,14 @@
 module.exports = function (config) {
   config.set({
     // base path used to resolve all patterns
-    basePath: '',
+    basePath: '/',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'chai'],
 
     // list of files/patterns to load in the browser
-    files: [{ pattern: 'spec.bundle.js', watched: false }],
+    files: [{ pattern: 'spec.`bundle`.js', watched: false }],
 
     // files to exclude
     exclude: [],
