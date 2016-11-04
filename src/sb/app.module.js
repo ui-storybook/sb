@@ -10,7 +10,7 @@ angular.module('sb', [
     'sb.core',
     'sb.modules',
     'sb.directives',
-    'sb.components',
     'sb.directives',
-    'sb.services'
+    'sb.services',
+    'sb.components'
 ]);

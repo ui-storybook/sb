@@ -1,35 +1,33 @@
 <md-sidenav md-component-id="left" layout="column" class="story__list-wrapper" md-disable-backdrop>
-    <story-list></story-list>
+	<story-list></story-list>
 </md-sidenav>
 
 <md-content flex layout="column">
 
-    <md-toolbar id="header">
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button button__open-sidebar" aria-label="Open sidebar" ng-class="{ 'hidden': vm.isSidebarOpen() }"
-                ng-click="vm.openSidebar()">
-                <i class="material-icons">menu</i>
-            </md-button>
-            <md-nav-bar md-selected-nav-item="vm.page" nav-bar-aria-label="navigation links">
-                <md-nav-item ui-sref="main.storybook({ state: 'preview' })" md-no-ink="true" md-nav-click="vm.selectPage('preview')" name="preview">Preview</md-nav-item>
-                <md-nav-item ui-sref="main.storybook({ state: 'template' })" md-no-ink="true" md-nav-click="vm.selectPage('template')" name="template">Template</md-nav-item>
-                <md-nav-item ui-sref="main.storybook({ state: 'model' })" md-no-ink="true" md-nav-click="vm.selectPage('model')" name="model">Model</md-nav-item>
-            </md-nav-bar>
-            <span flex></span>
-            <md-button class="md-icon-button button__split-view" aria-label="Split view" ng-class="{ 'active': vm.splitViewActive }"
-                ng-click="vm.toggleSplitView()">
-                <i class="material-icons">view_column</i>
-            </md-button>
-            <md-button class="md-icon-button button__responsive" aria-label="Responsive" ng-class="{ 'active': vm.responsiveActive }"
-                ng-click="vm.toggleResponsive()">
-                <i class="material-icons">phonelink</i>
-            </md-button>
-        </div>
-    </md-toolbar>
+	<md-toolbar id="header">
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button button__open-sidebar" aria-label="Open sidebar" ng-class="{ 'hidden': vm.isSidebarOpen() }"
+				ng-click="vm.openSidebar()">
+				<i class="material-icons">menu</i>
+			</md-button>
+			<md-nav-bar md-selected-nav-item="vm.page" nav-bar-aria-label="navigation links">
+				<md-nav-item ng-repeat="item in vm.componentsList track by $index" ui-sref="main.storybook({ state: item })" md-no-ink="true"
+					md-nav-click="vm.selectPage(item)" name="{{item}}">{{item}}</md-nav-item>
+			</md-nav-bar>
+			<span flex></span>
+			<md-button class="md-icon-button button__split-view" aria-label="Split view" ng-class="{ 'active': vm.splitViewActive }"
+				ng-click="vm.toggleSplitView()" ui-sref="main.storybook({ split: vm.splitViewActive, state: 'preview' })">
+				<i class="material-icons">view_column</i>
+			</md-button>
+			<md-button class="md-icon-button button__responsive" aria-label="Responsive" ng-class="{ 'active': vm.responsiveActive }"
+				ng-click="vm.toggleResponsive()" ui-sref="main.storybook({ split: vm.responsiveActive })">
+				<i class="material-icons">phonelink</i>
+			</md-button>
+		</div>
+	</md-toolbar>
 
-    <div flex layout="row" class="story__view" ng-class="{ 'split__active': vm.splitViewActive }">
-        <preview class="animate-show" ng-show="vm.activePage === 'preview'" flex layout="column"></preview>
-        <view class="animate-show" ng-show="vm.showViewModel('template')" flex layout="column"></view>
-        <model class="animate-show" ng-show="vm.showViewModel('model')" flex layout="column"></model>
-    </div>
+	<div flex layout="row" class="story__view" ng-class="{ 'split__active': vm.splitViewActive, 'responsive__active': vm.responsiveActive }">
+		<div ng-repeat="(key, item) in vm.components track by $index" flex layout="column" compile="item.template" ng-show="vm.showComponent(item.title)"></div>
+	</div>
+
 </md-content>

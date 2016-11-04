@@ -12,4 +12,19 @@ module.component('storyList', storyListComponent);
 module.component('model', modelComponent);
 module.component('view', templateComponent);
 
+module.run((storeService) => {
+    storeService.component({
+        title: 'preview',
+        template: '<preview flex layout="column"></preview>'
+    });
+    storeService.component({
+        title: 'model',
+        template: '<model flex layout="column"></model>'
+    })
+    storeService.component({
+        title: 'view',
+        template: '<view flex layout="column"></view>'
+    })
+});
+
 export default module;

@@ -1,6 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import homeComponent from './storybook.component';
+import compile from './helper.compile';
+
 
 let homeModule = angular.module('storybook', [
   uiRouter
@@ -19,6 +21,8 @@ let homeModule = angular.module('storybook', [
 })
 
 .component('storybook', homeComponent)
+
+.directive('compile', compile)
 
 .name;
 

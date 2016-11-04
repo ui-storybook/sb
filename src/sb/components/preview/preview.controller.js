@@ -46,8 +46,6 @@ class PreviewController {
 
   $onDestroy() {
     this.listener();
-    this.templateListener();
-    this.modelListener();
   }
 
   render(event, data) {
