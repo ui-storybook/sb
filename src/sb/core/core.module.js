@@ -17,7 +17,7 @@ import 'angular-ui-ace';
 
 import routeConfig from './core.route';
 
-const core = angular.module('asb.core', [
+const core = angular.module('sb.core', [
     'ui.router',
     'ngMaterial',
     'ngAnimate',

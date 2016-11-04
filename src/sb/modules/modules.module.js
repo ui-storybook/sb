@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import storybook from './storybook/storybook';
 
-let module = angular.module('asb.modules', [
+let module = angular.module('sb.modules', [
     storybook
 ]).name;
 

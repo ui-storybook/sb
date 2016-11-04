@@ -1,4 +1,8 @@
 import angular from 'angular';
-const module = angular.module('asb.services', []);
+import storeService from './store.service';
+
+const module = angular.module('sb.services', []);
+
+module.service('storeService', storeService);
 
 export default module;

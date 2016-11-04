@@ -38,7 +38,6 @@ class StoryListController {
     // Active story point
     this.active = this.active ? this.active : {};
 
-    // Select story
     this.selectStory();
   }
 
@@ -99,7 +98,7 @@ class StoryListController {
   selectComponent(force) {
     let section, storyTitle, pointTitle, component;
     let params = this.$state.params;
-
+    
     if (!force && this.$state.params.story && this.$state.params.point) {
       section = this.$state.params.section;
       storyTitle = this.$state.params.story;

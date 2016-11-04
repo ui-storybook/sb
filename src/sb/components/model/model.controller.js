@@ -9,7 +9,10 @@ class ModelController {
 
       // Listen for new component data and render it
       this.listener = $rootScope.$on('render', (event, entity) => {
-        this.render(event, entity.component);
+          setTimeout(() => {
+            this.render(event, entity.component)
+            $rootScope.$apply(); 
+          }, 0);
       });
 
       // ACE editor settings

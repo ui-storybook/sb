@@ -58,7 +58,7 @@ class StoriesAPI {
         try {
             // Find story from store
             let story = this.sections[sbObject.section][sbObject.story].find(i => i.id === sbObject.id);
-            console.log(story);
+            
             // Check if need load mock for story
             if (story && typeof story.model === 'string') {
                 story.model = this.getMock(story.model);
