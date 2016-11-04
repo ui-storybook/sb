@@ -106,8 +106,10 @@
     "test": "karma start",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changlog"
+  "config": {                                                                                                           
+    "commitizen": {                                                                                                     
+      "path": "node_modules/cz-conventional-changelog"                                                                                       
+    }                                                                                                                   
   },
   "author": "freeman14"
 }
