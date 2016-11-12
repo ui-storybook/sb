@@ -58,7 +58,7 @@ class StoriesAPI {
         try {
             // Find story from store
             let story = this.sections[sbObject.section][sbObject.story].find(i => i.id === sbObject.id);
-            
+
             // Check if need load mock for story
             if (story && typeof story.model === 'string') {
                 story.model = this.getMock(story.model);
@@ -89,11 +89,12 @@ class StoriesAPI {
      * 
      * @param key Mock name
      * @param value Mock value.
-     * @param performCB Function witch will call with mocked data
+     * @param perform Function witch will call with mocked data
+     * Use it to perform data structure as you need
      */
-    mock(key, value) {
+    mock(key, value, perform) {
         if (typeof value === 'object') {
-            this.mocks[key] = value;
+            this.mocks[key] = perform ? perform(value) : value;
         } else {
             throw new Error(`Cant't save mock for ${key}. Mock value should be an object. Double check it.`);
         }
