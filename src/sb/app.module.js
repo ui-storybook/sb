@@ -1,5 +1,7 @@
 import * as angular from 'angular';
 
+import 'mousetrap';
+
 import core from './core/core.module';
 import services from './services/services.module';
 import modules from './modules/modules.module';

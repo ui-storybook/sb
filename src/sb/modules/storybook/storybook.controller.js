@@ -10,6 +10,12 @@ class StorybookController {
     this.components = storeService.getAllComponents();
     this.componentsList = Object.keys(this.components);
 
+    this.isPluginBoxOpen = false;
+  }
+
+  $onDestroy() {
+    this.listener = null;
+    this.iframeListener = null;
   }
 
   $postLink() {
@@ -19,6 +25,7 @@ class StorybookController {
     if (this.$state.params.split === 'true') {
       this.toggleSplitView();
     }
+    this.initHotKeys();
   }
 
   showComponent(page) {
@@ -78,6 +85,26 @@ class StorybookController {
 
   openSidebar() {
     this.$mdSidenav('left').open();
+  }
+
+  initHotKeys() {
+
+    for (let v in this.components) {
+      const component = this.components[v];
+      if (component.hotkey) {
+        this.listener.bind(component.hotkey, component.cb);
+        this.iframeListener.bind(component.hotkey, component.cb);
+      }
+    }
+    Mousetrap.bind(['command+b', 'ctrl+b'], () => {
+      this.openPluginBox();
+      this.$scope.$apply();
+      return false;
+    });
+  }
+
+  openPluginBox() {
+    this.isPluginBoxOpen = !this.isPluginBoxOpen;
   }
 
 }

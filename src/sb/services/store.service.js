@@ -5,7 +5,7 @@ export default class StoreService {
     }
 
     component(item) {
-        
+
         if (!item.title || !item.template) {
             throw new Error(`${item.title} is not correct component. Title or template is missing`);
         }

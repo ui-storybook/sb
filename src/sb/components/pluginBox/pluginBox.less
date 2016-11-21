@@ -1,0 +1,35 @@
+.plugin__box {
+    display: none;
+
+    &.isOpen {
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0; 
+    }
+
+    &.isOpen .plugin__box-overlay{
+        z-index: 80;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        display: block;
+    }
+
+    .plugin__box-body {
+        background: #fff;
+        width: 500px;
+        height: 300px;
+        z-index: 90;
+        position: relative;
+        margin: 0 auto;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.37);
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+}

@@ -1,0 +1,20 @@
+<div class="plugin__box" ng-class="{ 'isOpen': vm.open === true }">
+	<div class="plugin__box-overlay"></div>
+	<!--ng-click="vm.close()"-->
+	<div class="plugin__box-body">
+		<md-autocomplete 
+			md-search-text="vm.searchText" 
+			md-items="plugin in vm.getPluginsList(vm.searchText)"
+			md-item-text="plugin.title" 
+			md-min-length="0" 
+			placeholder="Type to search plugin that you need"
+		>
+			<md-item-template>
+				<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{plugin.title}}</span>
+			</md-item-template>
+			<md-not-found>
+				No states matching were found.
+			</md-not-found>
+		</md-autocomplete>
+	</div>
+</div>

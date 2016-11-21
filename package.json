@@ -8,11 +8,8 @@
     "type": "git",
     "url": "https://github.com/ui-storybook/sb"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "git-url-parse": "*",
-    "shelljs": "*",
     "ace-builds": "*",
     "angular-animate": "*",
     "angular-aria": "*",
@@ -40,6 +37,7 @@
     "cz-conventional-changelog": "^1.2.0",
     "del": "*",
     "fs-walk": "*",
+    "git-url-parse": "*",
     "gulp": "*",
     "gulp-rename": "*",
     "gulp-template": "*",
@@ -56,12 +54,14 @@
     "less-loader": "*",
     "lodash": "*",
     "mocha": "*",
+    "mousetrap": "^1.6.0",
     "ng-annotate-loader": "*",
     "node-libs-browser": "*",
     "normalize.css": "*",
     "raw-loader": "*",
     "run-sequence": "*",
     "semantic-release": "^4.3.5",
+    "shelljs": "*",
     "style-loader": "*",
     "stylus": "*",
     "stylus-loader": "*",
@@ -75,10 +75,10 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "config": {                                                                                                           
-    "commitizen": {                                                                                                     
-      "path": "node_modules/cz-conventional-changelog"                                                                                       
-    }                                                                                                                   
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "author": "freeman14"
 }
