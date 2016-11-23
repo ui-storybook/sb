@@ -32744,7 +32744,7 @@
 	var element = document.getElementById('asb__main');
 
 	_angular2.default.element(element).ready(function () {
-	    _angular2.default.bootstrap(element, ['asb'], { strictDi: false });
+	    _angular2.default.bootstrap(element, ['sb'], { strictDi: false });
 	});
 
 /***/ },
@@ -32805,15 +32805,15 @@
 
 	var _services2 = _interopRequireDefault(_services);
 
-	var _modules = __webpack_require__(356);
+	var _modules = __webpack_require__(357);
 
 	var _modules2 = _interopRequireDefault(_modules);
 
-	var _components = __webpack_require__(363);
+	var _components = __webpack_require__(385);
 
 	var _components2 = _interopRequireDefault(_components);
 
-	var _directives = __webpack_require__(407);
+	var _directives = __webpack_require__(409);
 
 	var _directives2 = _interopRequireDefault(_directives);
 
@@ -32821,7 +32821,7 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	angular.module('asb', ['asb.core', 'asb.modules', 'asb.directives', 'asb.components', 'asb.directives', 'asb.services']);
+	angular.module('sb', ['sb.core', 'sb.modules', 'sb.directives', 'sb.directives', 'sb.services', 'sb.components']);
 
 /***/ },
 /* 336 */
@@ -32865,7 +32865,7 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var core = angular.module('asb.core', ['ui.router', 'ngMaterial', 'ngAnimate', 'angularResizable', 'ui.ace']);
+	var core = angular.module('sb.core', ['ui.router', 'ngMaterial', 'ngAnimate', 'angularResizable', 'ui.ace']);
 
 	core.constant('local', function () {
 	    var isLocal = document.location.hostname === 'localhost';
@@ -79363,14 +79363,72 @@
 
 	var _angular2 = _interopRequireDefault(_angular);
 
+	var _store = __webpack_require__(356);
+
+	var _store2 = _interopRequireDefault(_store);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _module = _angular2.default.module('asb.services', []);
+	var _module = _angular2.default.module('sb.services', []);
+
+	_module.service('storeService', _store2.default);
 
 	exports.default = _module;
 
 /***/ },
 /* 356 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _classCallCheck2 = __webpack_require__(310);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(311);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var StoreService = function () {
+	    function StoreService() {
+	        (0, _classCallCheck3.default)(this, StoreService);
+
+	        this.components = {};
+	    }
+
+	    (0, _createClass3.default)(StoreService, [{
+	        key: "component",
+	        value: function component(item) {
+
+	            if (!item.title || !item.template) {
+	                throw new Error(item.title + " is not correct component. Title or template is missing");
+	            }
+
+	            if (this.components[item.title]) {
+	                throw new Error("Component with " + item.title + " is alredy defined. Please take another title");
+	            }
+
+	            this.components[item.title] = item;
+	        }
+	    }, {
+	        key: "getAllComponents",
+	        value: function getAllComponents() {
+	            return this.components;
+	        }
+	    }]);
+	    return StoreService;
+	}();
+
+	exports.default = StoreService;
+
+/***/ },
+/* 357 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79383,18 +79441,18 @@
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _storybook = __webpack_require__(357);
+	var _storybook = __webpack_require__(358);
 
 	var _storybook2 = _interopRequireDefault(_storybook);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _module = _angular2.default.module('asb.modules', [_storybook2.default]).name;
+	var _module = _angular2.default.module('sb.modules', [_storybook2.default]).name;
 
 	exports.default = _module;
 
 /***/ },
-/* 357 */
+/* 358 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79411,9 +79469,13 @@
 
 	var _angularUiRouter2 = _interopRequireDefault(_angularUiRouter);
 
-	var _storybook = __webpack_require__(358);
+	var _storybook = __webpack_require__(359);
 
 	var _storybook2 = _interopRequireDefault(_storybook);
+
+	var _helper = __webpack_require__(384);
+
+	var _helper2 = _interopRequireDefault(_helper);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79425,12 +79487,12 @@
 	    template: '<storybook flex layout="row"></storybook>',
 	    reloadOnSearch: false
 	  });
-	}]).component('storybook', _storybook2.default).name;
+	}]).component('storybook', _storybook2.default).directive('compile', _helper2.default).name;
 
 	exports.default = homeModule;
 
 /***/ },
-/* 358 */
+/* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79439,15 +79501,15 @@
 	  value: true
 	});
 
-	var _storybook = __webpack_require__(359);
+	var _storybook = __webpack_require__(360);
 
 	var _storybook2 = _interopRequireDefault(_storybook);
 
-	var _storybook3 = __webpack_require__(360);
+	var _storybook3 = __webpack_require__(361);
 
 	var _storybook4 = _interopRequireDefault(_storybook3);
 
-	__webpack_require__(361);
+	__webpack_require__(382);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79461,13 +79523,13 @@
 	exports.default = StorybookComponent;
 
 /***/ },
-/* 359 */
+/* 360 */
 /***/ function(module, exports) {
 
-	module.exports = "<md-sidenav md-component-id=\"left\" layout=\"column\" class=\"story__list-wrapper\" md-disable-backdrop>\n    <story-list></story-list>\n</md-sidenav>\n\n<md-content flex layout=\"column\">\n\n    <md-toolbar id=\"header\">\n        <div class=\"md-toolbar-tools\">\n            <md-button class=\"md-icon-button button__open-sidebar\" aria-label=\"Open sidebar\" ng-class=\"{ 'hidden': vm.isSidebarOpen() }\"\n                ng-click=\"vm.openSidebar()\">\n                <i class=\"material-icons\">menu</i>\n            </md-button>\n            <md-nav-bar md-selected-nav-item=\"vm.page\" nav-bar-aria-label=\"navigation links\">\n                <md-nav-item ui-sref=\"main.storybook({ state: 'preview' })\" md-no-ink=\"true\" md-nav-click=\"vm.selectPage('preview')\" name=\"preview\">Preview</md-nav-item>\n                <md-nav-item ui-sref=\"main.storybook({ state: 'template' })\" md-no-ink=\"true\" md-nav-click=\"vm.selectPage('template')\" name=\"template\">Template</md-nav-item>\n                <md-nav-item ui-sref=\"main.storybook({ state: 'model' })\" md-no-ink=\"true\" md-nav-click=\"vm.selectPage('model')\" name=\"model\">Model</md-nav-item>\n            </md-nav-bar>\n            <span flex></span>\n            <md-button class=\"md-icon-button button__split-view\" aria-label=\"Split view\" ng-class=\"{ 'active': vm.splitViewActive }\"\n                ng-click=\"vm.toggleSplitView()\">\n                <i class=\"material-icons\">view_column</i>\n            </md-button>\n            <md-button class=\"md-icon-button button__responsive\" aria-label=\"Responsive\" ng-class=\"{ 'active': vm.responsiveActive }\"\n                ng-click=\"vm.toggleResponsive()\">\n                <i class=\"material-icons\">phonelink</i>\n            </md-button>\n        </div>\n    </md-toolbar>\n\n    <div flex layout=\"row\" class=\"story__view\" ng-class=\"{ 'split__active': vm.splitViewActive }\">\n        <preview class=\"animate-show\" ng-show=\"vm.activePage === 'preview'\" flex layout=\"column\"></preview>\n        <view class=\"animate-show\" ng-show=\"vm.showViewModel('template')\" flex layout=\"column\"></view>\n        <model class=\"animate-show\" ng-show=\"vm.showViewModel('model')\" flex layout=\"column\"></model>\n    </div>\n</md-content>"
+	module.exports = "<md-sidenav md-component-id=\"left\" layout=\"column\" class=\"story__list-wrapper\" md-disable-backdrop>\n\t<story-list></story-list>\n</md-sidenav>\n\n<md-content flex layout=\"column\">\n\n\t<md-toolbar id=\"header\">\n\t\t<div class=\"md-toolbar-tools\">\n\t\t\t<md-button class=\"md-icon-button button__open-sidebar\" aria-label=\"Open sidebar\" ng-class=\"{ 'hidden': vm.isSidebarOpen() }\"\n\t\t\t\tng-click=\"vm.openSidebar()\">\n\t\t\t\t<i class=\"material-icons\">menu</i>\n\t\t\t</md-button>\n\t\t\t<md-nav-bar md-selected-nav-item=\"vm.page\" nav-bar-aria-label=\"navigation links\">\n\t\t\t\t<md-nav-item ng-repeat=\"item in vm.componentsList track by $index\" ui-sref=\"main.storybook({ state: item })\" md-no-ink=\"true\"\n\t\t\t\t\tmd-nav-click=\"vm.selectPage(item)\" name=\"{{item}}\">{{item}}</md-nav-item>\n\t\t\t</md-nav-bar>\n\t\t\t<span flex></span>\n\t\t\t<md-button class=\"md-icon-button button__split-view\" aria-label=\"Split view\" ng-class=\"{ 'active': vm.splitViewActive }\"\n\t\t\t\tng-click=\"vm.toggleSplitView()\" ui-sref=\"main.storybook({ split: vm.splitViewActive, state: 'preview' })\">\n\t\t\t\t<i class=\"material-icons\">view_column</i>\n\t\t\t</md-button>\n\t\t\t<md-button class=\"md-icon-button button__responsive\" aria-label=\"Responsive\" ng-class=\"{ 'active': vm.responsiveActive }\"\n\t\t\t\tng-click=\"vm.toggleResponsive()\" ui-sref=\"main.storybook({ split: vm.responsiveActive })\">\n\t\t\t\t<i class=\"material-icons\">phonelink</i>\n\t\t\t</md-button>\n\t\t</div>\n\t</md-toolbar>\n\n\t<div flex layout=\"row\" class=\"story__view\" ng-class=\"{ 'split__active': vm.splitViewActive, 'responsive__active': vm.responsiveActive }\">\n\t\t<div ng-repeat=\"(key, item) in vm.components track by $index\" flex layout=\"column\" compile=\"item.template\" ng-show=\"vm.showComponent(item.title)\"></div>\n\t</div>\n\n</md-content>"
 
 /***/ },
-/* 360 */
+/* 361 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79475,6 +79537,10 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _keys = __webpack_require__(362);
+
+	var _keys2 = _interopRequireDefault(_keys);
 
 	var _classCallCheck2 = __webpack_require__(310);
 
@@ -79487,9 +79553,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var StorybookController = function () {
-	  function StorybookController($state, $scope, $mdSidenav) {
-	    var _this = this;
-
+	  function StorybookController($state, $scope, $mdSidenav, storeService) {
 	    (0, _classCallCheck3.default)(this, StorybookController);
 
 	    this.$state = $state;
@@ -79499,22 +79563,13 @@
 	    var page = $state.params.state;
 	    this.page = this.activePage = page ? page : 'preview';
 
-	    document.onkeydown = function (e) {
-	      _this.keyActions[e.keyCode] && _this.keyActions[e.keyCode]();
-	    };
-
-	    this.keyActions = {
-	      // 84: () => this.openTemplate(),
-	      // 80: () => this.openPreview(),
-	      // 77: () => this.openModel(),
-	      // 82: () => this.toggleResponsive()
-	    };
+	    this.components = storeService.getAllComponents();
+	    this.componentsList = (0, _keys2.default)(this.components);
 	  }
 
 	  (0, _createClass3.default)(StorybookController, [{
 	    key: '$postLink',
 	    value: function $postLink() {
-	      this.preview = angular.element(document.getElementsByTagName('preview')[0]);
 	      if (this.$state.params.responsive === 'true') {
 	        this.toggleResponsive();
 	      }
@@ -79523,19 +79578,24 @@
 	      }
 	    }
 	  }, {
+	    key: 'showComponent',
+	    value: function showComponent(page) {
+	      if (!this.splitViewActive) {
+	        return this.activePage === page;
+	      } else {
+	        return this.splitPage === page || page === 'preview';
+	      }
+	    }
+	  }, {
 	    key: 'toggleResponsive',
 	    value: function toggleResponsive() {
-	      this.preview.toggleClass('responsive__active');
 	      this.responsiveActive = !this.responsiveActive;
-	      this.goTo('responsive', this.responsiveActive);
 	    }
 	  }, {
 	    key: 'toggleSplitView',
 	    value: function toggleSplitView() {
 	      var page = this.activePage;
-	      this.openPreview();
 	      this.splitViewActive = !this.splitViewActive;
-	      this.goTo('split', this.splitViewActive);
 	      if (this.splitViewActive) {
 	        this.splitPage = page !== 'preview' ? page : 'model';
 	      }
@@ -79553,25 +79613,10 @@
 	    key: 'selectPage',
 	    value: function selectPage(page) {
 	      if (!this.splitViewActive) {
-	        this.activePage = page;
+	        this.activePage = this.components[page].title;
 	      } else if (page !== 'preview') {
-	        this.splitPage = page;
+	        this.splitPage = this.components[page].title;
 	      }
-	    }
-	  }, {
-	    key: 'openModel',
-	    value: function openModel() {
-	      this.goTo('state', 'model');
-	    }
-	  }, {
-	    key: 'openPreview',
-	    value: function openPreview() {
-	      this.goTo('state', 'preview');
-	    }
-	  }, {
-	    key: 'openTemplate',
-	    value: function openTemplate() {
-	      this.goTo('state', 'template');
 	    }
 	  }, {
 	    key: 'goTo',
@@ -79606,13 +79651,249 @@
 	exports.default = StorybookController;
 
 /***/ },
-/* 361 */
+/* 362 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(363), __esModule: true };
+
+/***/ },
+/* 363 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(364);
+	module.exports = __webpack_require__(317).Object.keys;
+
+/***/ },
+/* 364 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 Object.keys(O)
+	var toObject = __webpack_require__(365)
+	  , $keys    = __webpack_require__(367);
+
+	__webpack_require__(381)('keys', function(){
+	  return function keys(it){
+	    return $keys(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 365 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(366);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 366 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 367 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(368)
+	  , enumBugKeys = __webpack_require__(380);
+
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 368 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(369)
+	  , toIObject    = __webpack_require__(370)
+	  , arrayIndexOf = __webpack_require__(373)(false)
+	  , IE_PROTO     = __webpack_require__(377)('IE_PROTO');
+
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 369 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 370 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(371)
+	  , defined = __webpack_require__(366);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 371 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(372);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 372 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 373 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(370)
+	  , toLength  = __webpack_require__(374)
+	  , toIndex   = __webpack_require__(376);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 374 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(375)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 375 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 376 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(375)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 377 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(378)('keys')
+	  , uid    = __webpack_require__(379);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 378 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(316)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 379 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 380 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 381 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(315)
+	  , core    = __webpack_require__(317)
+	  , fails   = __webpack_require__(326);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(362);
+	var content = __webpack_require__(383);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(305)(content, {});
@@ -79632,7 +79913,7 @@
 	}
 
 /***/ },
-/* 362 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(304)();
@@ -79646,13 +79927,34 @@
 
 
 /***/ },
-/* 363 */
+/* 384 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	exports.default = function ($compile) {
+	    return function (scope, element, attrs) {
+	        scope.$watch(function (scope) {
+	            return scope.$eval(attrs.compile);
+	        }, function (value) {
+	            element.html(value);
+	            $compile(element.contents())(scope);
+	        });
+	    };
+	};
+
+/***/ },
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _angular = __webpack_require__(300);
@@ -79661,35 +79963,50 @@
 
 	__webpack_require__(337);
 
-	var _preview = __webpack_require__(364);
+	var _preview = __webpack_require__(386);
 
 	var _preview2 = _interopRequireDefault(_preview);
 
-	var _storyList = __webpack_require__(370);
+	var _storyList = __webpack_require__(392);
 
 	var _storyList2 = _interopRequireDefault(_storyList);
 
-	var _template = __webpack_require__(395);
+	var _template = __webpack_require__(397);
 
 	var _template2 = _interopRequireDefault(_template);
 
-	var _model = __webpack_require__(400);
+	var _model = __webpack_require__(402);
 
 	var _model2 = _interopRequireDefault(_model);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _module = _angular2.default.module('asb.components', ['ui.router']);
+	var _module = _angular2.default.module('sb.components', ['ui.router']);
 
 	_module.component('preview', _preview2.default);
 	_module.component('storyList', _storyList2.default);
 	_module.component('model', _model2.default);
 	_module.component('view', _template2.default);
 
+	_module.run(["storeService", function (storeService) {
+	    storeService.component({
+	        title: 'preview',
+	        template: '<preview flex layout="column"></preview>'
+	    });
+	    storeService.component({
+	        title: 'model',
+	        template: '<model flex layout="column"></model>'
+	    });
+	    storeService.component({
+	        title: 'view',
+	        template: '<view flex layout="column"></view>'
+	    });
+	}]);
+
 	exports.default = _module;
 
 /***/ },
-/* 364 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79698,15 +80015,15 @@
 	  value: true
 	});
 
-	var _preview = __webpack_require__(365);
+	var _preview = __webpack_require__(387);
 
 	var _preview2 = _interopRequireDefault(_preview);
 
-	var _preview3 = __webpack_require__(366);
+	var _preview3 = __webpack_require__(388);
 
 	var _preview4 = _interopRequireDefault(_preview3);
 
-	__webpack_require__(368);
+	__webpack_require__(390);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79720,13 +80037,13 @@
 	exports.default = previewComponent;
 
 /***/ },
-/* 365 */
+/* 387 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"preview__wrapper\">\n    <div class=\"preview__heder\">\n        <md-input-container class=\"md-block\" flex-gt-sm>\n            <md-select aria-label=\"1\" ng-model=\"vm.selectedDevice\">\n                <md-option ng-click=\"vm.selectDevice(device)\" ng-bind=\"device\" ng-repeat=\"device in vm.devices\" value=\"{{device}}\">\n                    <span aria-label=\"{{device}}\"></span>\n                </md-option>\n            </md-select>\n        </md-input-container>\n        <md-input-container>\n            <input type=\"text\" ng-model=\"vm.dynamicSize.width\" aria-label=\"width\">\n        </md-input-container>\n        <md-input-container>\n            <input type=\"text\" ng-model=\"vm.dynamicSize.height\" aria-label=\"height\">\n        </md-input-container>\n    </div>\n    <div id=\"resizable\" resizable r-directions=\"['bottom', 'right']\" r-flex=\"false\" r-no-throttle=\"true\" r-width=\"vm.dynamicSize.width\"\n        r-height=\"vm.dynamicSize.height\">\n        <iframe src=\"preview.html\" flex frameborder=\"0\" id=\"preview__iframe\" name=\"preview\"></iframe>\n    </div>\n</div>"
 
 /***/ },
-/* 366 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79743,7 +80060,7 @@
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _devices = __webpack_require__(367);
+	var _devices = __webpack_require__(389);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79795,8 +80112,6 @@
 	    key: '$onDestroy',
 	    value: function $onDestroy() {
 	      this.listener();
-	      this.templateListener();
-	      this.modelListener();
 	    }
 	  }, {
 	    key: 'render',
@@ -79861,7 +80176,7 @@
 	exports.default = PreviewController;
 
 /***/ },
-/* 367 */
+/* 389 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -79903,13 +80218,13 @@
 	var devices = exports.devices = ['Custom', 'iPhone 5', 'iPhone 6', 'iPhone 6 Plus', 'iPad', 'Nexus 5X', 'Nexus 6P'];
 
 /***/ },
-/* 368 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(369);
+	var content = __webpack_require__(391);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(305)(content, {});
@@ -79929,7 +80244,7 @@
 	}
 
 /***/ },
-/* 369 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(304)();
@@ -79937,13 +80252,13 @@
 
 
 	// module
-	exports.push([module.id, ".preview__wrapper {\n  width: 100%;\n  height: 100%;\n}\n.preview__wrapper md-input-container {\n  margin: 0 !important;\n  max-width: 120px;\n}\n.preview__wrapper .preview__heder {\n  display: none;\n  background: #fff;\n  margin: 0 -30px;\n  padding: 5px;\n  box-shadow: 0px 1px 1px rgba(184, 184, 184, 0.54);\n  justify-content: center;\n}\n.preview__wrapper .preview__heder input {\n  width: 40px;\n  text-align: center;\n}\n.preview__wrapper .resizable {\n  width: 100%;\n  height: 100%;\n}\n.preview__wrapper .rg-bottom {\n  display: none;\n  padding: 5px 0;\n}\n.preview__wrapper .rg-right {\n  display: none;\n  padding: 0 5px;\n}\n.preview__wrapper iframe {\n  width: 100%;\n  height: 100%;\n}\n.responsive__active .preview__heder {\n  display: flex;\n}\n.responsive__active .resizable {\n  position: relative;\n  margin: 25px auto;\n  background: #fff;\n  box-shadow: 0px 1px 2px rgba(184, 184, 184, 0.54);\n  border-radius: 2px;\n}\n.responsive__active .rg-bottom {\n  display: block;\n  margin-bottom: -25px;\n}\n.responsive__active .rg-bottom:hover {\n  background: rgba(0, 0, 0, 0.04);\n}\n.responsive__active .rg-right {\n  display: block;\n  margin-right: -25px;\n}\n.responsive__active .rg-right:hover {\n  background: rgba(0, 0, 0, 0.04);\n}\npreview:not(.responsive__active) .resizable {\n  width: 100% !important;\n  height: 100% !important;\n}\n", ""]);
+	exports.push([module.id, ".preview__wrapper {\n  width: 100%;\n  height: 100%;\n}\n.preview__wrapper md-input-container {\n  margin: 0 !important;\n  max-width: 120px;\n}\n.preview__wrapper .preview__heder {\n  display: none;\n  background: #fff;\n  margin: 0 -30px;\n  padding: 5px;\n  box-shadow: 0px 1px 1px rgba(184, 184, 184, 0.54);\n  justify-content: center;\n}\n.preview__wrapper .preview__heder input {\n  width: 40px;\n  text-align: center;\n}\n.preview__wrapper .resizable {\n  width: 100%;\n  height: 100%;\n}\n.preview__wrapper .rg-bottom {\n  display: none;\n  padding: 5px 0;\n}\n.preview__wrapper .rg-right {\n  display: none;\n  padding: 0 5px;\n}\n.preview__wrapper iframe {\n  width: 100%;\n  height: 100%;\n}\n.responsive__active .preview__heder {\n  display: flex;\n}\n.responsive__active .resizable {\n  position: relative;\n  margin: 25px auto;\n  background: #fff;\n  box-shadow: 0px 1px 2px rgba(184, 184, 184, 0.54);\n  border-radius: 2px;\n}\n.responsive__active .rg-bottom {\n  display: block;\n  margin-bottom: -25px;\n}\n.responsive__active .rg-bottom:hover {\n  background: rgba(0, 0, 0, 0.04);\n}\n.responsive__active .rg-right {\n  display: block;\n  margin-right: -25px;\n}\n.responsive__active .rg-right:hover {\n  background: rgba(0, 0, 0, 0.04);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 370 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79952,15 +80267,15 @@
 	  value: true
 	});
 
-	var _storyList = __webpack_require__(371);
+	var _storyList = __webpack_require__(393);
 
 	var _storyList2 = _interopRequireDefault(_storyList);
 
-	var _storyList3 = __webpack_require__(372);
+	var _storyList3 = __webpack_require__(394);
 
 	var _storyList4 = _interopRequireDefault(_storyList3);
 
-	__webpack_require__(393);
+	__webpack_require__(395);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -79974,13 +80289,13 @@
 	exports.default = storyListComponent;
 
 /***/ },
-/* 371 */
+/* 393 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"sidebar__header\">\n\n\t<div ng-if=\"!vm.searchPanel\" class=\"sidebar__header-main\">\n\t\t<a href=\"https://github.com/ui-storybook/sb\" target=\"_blank\" class=\"sb-logo\"></a>\n\t\t<span flex></span>\n\t\t<button ng-click=\"vm.openSearch()\" class=\"md-icon-button md-button md-ink-ripple\">\n\t\t<i class=\"material-icons icon__search\">search</i>\n\t</button>\n\t\t<md-button ng-click=\"vm.sloseSidebar()\" class=\"md-icon-button button__close-sidebar\" md-no-ink aria-label=\"Close sidebar\">\n\t\t\t<i class=\"material-icons icon__close-sidebar\">arrow_back</i>\n\t\t</md-button>\n\t</div>\n\n\t<div class=\"search\" ng-if=\"vm.searchPanel\">\n\t\t<i class=\"material-icons icon__search\">search</i>\n\t\t<input type=\"text\" ng-model=\"vm.search\" placeholder=\"Search\" class=\"search__input\">\n\t\t<md-button ng-click=\"vm.closeSearch()\" class=\"md-icon-button button__close-sidebar\" md-no-ink aria-label=\"Close sidebar\">\n\t\t\t<i class=\"material-icons icon__close-sidebar\">close</i>\n\t\t</md-button>\n\t</div>\n\n</div>\n<md-input-container class=\"md-block section__select\" flex-gt-sm ng-hide=\"vm.search.length\">\n\t<h2>Section</h2>\n\t<md-select aria-label=\"1\" ng-model=\"vm.selectedSection\">\n\t\t<md-option ng-click=\"vm.selectSection(section)\" ng-bind=\"section\" ng-repeat=\"section in vm.sectionsList\" value=\"{{section}}\">\n\t\t\t<span aria-label=\"{{section}}\"></span>\n\t\t</md-option>\n\t</md-select>\n</md-input-container>\n<md-content>\n\t<section class=\"story__list\" ng-repeat=\"(story, components) in vm.stories track by $index\">\n\t\t<md-subheader ng-class=\"{'active': vm.active.story === story}\" ng-bind=\"story\" class=\"story__name\" ng-hide=\"vm.search.length\"></md-subheader>\n\t\t<md-list-item class=\"story__point md-2-line\" ng-repeat=\"component in components | filter: { title: vm.search } track by $index\"\n\t\t\tng-click=\"vm.selectComponentFromList(story, component)\" ng-class=\"{'active': vm.active.point === component.title}\" aria-label=\"{{ vm.active.point }}\">\n\t\t\t<div class=\"md-list-item-text\" layout=\"column\">\n\t\t\t\t<h3 class=\"story__list-item\" ng-bind=\"component.title\"></h3>\n\t\t\t</div>\n\t\t</md-list-item>\n\t</section>\n</md-content>"
 
 /***/ },
-/* 372 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79989,7 +80304,7 @@
 	  value: true
 	});
 
-	var _keys = __webpack_require__(373);
+	var _keys = __webpack_require__(362);
 
 	var _keys2 = _interopRequireDefault(_keys);
 
@@ -80047,7 +80362,6 @@
 	      // Active story point
 	      this.active = this.active ? this.active : {};
 
-	      // Select story
 	      this.selectStory();
 	    }
 	  }, {
@@ -80171,249 +80485,13 @@
 	exports.default = StoryListController;
 
 /***/ },
-/* 373 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(374), __esModule: true };
-
-/***/ },
-/* 374 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(375);
-	module.exports = __webpack_require__(317).Object.keys;
-
-/***/ },
-/* 375 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(376)
-	  , $keys    = __webpack_require__(378);
-
-	__webpack_require__(392)('keys', function(){
-	  return function keys(it){
-	    return $keys(toObject(it));
-	  };
-	});
-
-/***/ },
-/* 376 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(377);
-	module.exports = function(it){
-	  return Object(defined(it));
-	};
-
-/***/ },
-/* 377 */
-/***/ function(module, exports) {
-
-	// 7.2.1 RequireObjectCoercible(argument)
-	module.exports = function(it){
-	  if(it == undefined)throw TypeError("Can't call method on  " + it);
-	  return it;
-	};
-
-/***/ },
-/* 378 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys       = __webpack_require__(379)
-	  , enumBugKeys = __webpack_require__(391);
-
-	module.exports = Object.keys || function keys(O){
-	  return $keys(O, enumBugKeys);
-	};
-
-/***/ },
-/* 379 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var has          = __webpack_require__(380)
-	  , toIObject    = __webpack_require__(381)
-	  , arrayIndexOf = __webpack_require__(384)(false)
-	  , IE_PROTO     = __webpack_require__(388)('IE_PROTO');
-
-	module.exports = function(object, names){
-	  var O      = toIObject(object)
-	    , i      = 0
-	    , result = []
-	    , key;
-	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
-	  // Don't enum bug & hidden keys
-	  while(names.length > i)if(has(O, key = names[i++])){
-	    ~arrayIndexOf(result, key) || result.push(key);
-	  }
-	  return result;
-	};
-
-/***/ },
-/* 380 */
-/***/ function(module, exports) {
-
-	var hasOwnProperty = {}.hasOwnProperty;
-	module.exports = function(it, key){
-	  return hasOwnProperty.call(it, key);
-	};
-
-/***/ },
-/* 381 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(382)
-	  , defined = __webpack_require__(377);
-	module.exports = function(it){
-	  return IObject(defined(it));
-	};
-
-/***/ },
-/* 382 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(383);
-	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-	  return cof(it) == 'String' ? it.split('') : Object(it);
-	};
-
-/***/ },
-/* 383 */
-/***/ function(module, exports) {
-
-	var toString = {}.toString;
-
-	module.exports = function(it){
-	  return toString.call(it).slice(8, -1);
-	};
-
-/***/ },
-/* 384 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// false -> Array#indexOf
-	// true  -> Array#includes
-	var toIObject = __webpack_require__(381)
-	  , toLength  = __webpack_require__(385)
-	  , toIndex   = __webpack_require__(387);
-	module.exports = function(IS_INCLUDES){
-	  return function($this, el, fromIndex){
-	    var O      = toIObject($this)
-	      , length = toLength(O.length)
-	      , index  = toIndex(fromIndex, length)
-	      , value;
-	    // Array#includes uses SameValueZero equality algorithm
-	    if(IS_INCLUDES && el != el)while(length > index){
-	      value = O[index++];
-	      if(value != value)return true;
-	    // Array#toIndex ignores holes, Array#includes - not
-	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
-	      if(O[index] === el)return IS_INCLUDES || index || 0;
-	    } return !IS_INCLUDES && -1;
-	  };
-	};
-
-/***/ },
-/* 385 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(386)
-	  , min       = Math.min;
-	module.exports = function(it){
-	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-	};
-
-/***/ },
-/* 386 */
-/***/ function(module, exports) {
-
-	// 7.1.4 ToInteger
-	var ceil  = Math.ceil
-	  , floor = Math.floor;
-	module.exports = function(it){
-	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-	};
-
-/***/ },
-/* 387 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var toInteger = __webpack_require__(386)
-	  , max       = Math.max
-	  , min       = Math.min;
-	module.exports = function(index, length){
-	  index = toInteger(index);
-	  return index < 0 ? max(index + length, 0) : min(index, length);
-	};
-
-/***/ },
-/* 388 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var shared = __webpack_require__(389)('keys')
-	  , uid    = __webpack_require__(390);
-	module.exports = function(key){
-	  return shared[key] || (shared[key] = uid(key));
-	};
-
-/***/ },
-/* 389 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var global = __webpack_require__(316)
-	  , SHARED = '__core-js_shared__'
-	  , store  = global[SHARED] || (global[SHARED] = {});
-	module.exports = function(key){
-	  return store[key] || (store[key] = {});
-	};
-
-/***/ },
-/* 390 */
-/***/ function(module, exports) {
-
-	var id = 0
-	  , px = Math.random();
-	module.exports = function(key){
-	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-	};
-
-/***/ },
-/* 391 */
-/***/ function(module, exports) {
-
-	// IE 8- don't enum bug keys
-	module.exports = (
-	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-	).split(',');
-
-/***/ },
-/* 392 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(315)
-	  , core    = __webpack_require__(317)
-	  , fails   = __webpack_require__(326);
-	module.exports = function(KEY, exec){
-	  var fn  = (core.Object || {})[KEY] || Object[KEY]
-	    , exp = {};
-	  exp[KEY] = exec(fn);
-	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
-	};
-
-/***/ },
-/* 393 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(394);
+	var content = __webpack_require__(396);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(305)(content, {});
@@ -80433,7 +80511,7 @@
 	}
 
 /***/ },
-/* 394 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(304)();
@@ -80447,7 +80525,7 @@
 
 
 /***/ },
-/* 395 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80456,15 +80534,15 @@
 	  value: true
 	});
 
-	var _templatePartial = __webpack_require__(396);
+	var _templatePartial = __webpack_require__(398);
 
 	var _templatePartial2 = _interopRequireDefault(_templatePartial);
 
-	var _template = __webpack_require__(397);
+	var _template = __webpack_require__(399);
 
 	var _template2 = _interopRequireDefault(_template);
 
-	__webpack_require__(398);
+	__webpack_require__(400);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80478,13 +80556,13 @@
 	exports.default = templateComponent;
 
 /***/ },
-/* 396 */
+/* 398 */
 /***/ function(module, exports) {
 
 	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.component.template\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex ng-bind=\"vm.errorMessage\"></div>"
 
 /***/ },
-/* 397 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80591,13 +80669,13 @@
 	exports.default = TemplateController;
 
 /***/ },
-/* 398 */
+/* 400 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(399);
+	var content = __webpack_require__(401);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(305)(content, {});
@@ -80617,7 +80695,7 @@
 	}
 
 /***/ },
-/* 399 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(304)();
@@ -80625,13 +80703,13 @@
 
 
 	// module
-	exports.push([module.id, "view {\n  background: #fff;\n  padding-left: 20px;\n  font-size: 14px;\n}\nview .ace_editor {\n  font-size: 14px;\n}\n.ace-tm .ace_print-margin {\n  display: none;\n}\n.ace-tm .ace_gutter-active-line,\n.ace-tm .ace_active-line {\n  background-color: #f0f0f0;\n}\n.ace-tm .ace_gutter {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.54);\n}\n", ""]);
+	exports.push([module.id, "view {\n  background: #fff;\n  font-size: 14px;\n}\nview .ace_editor {\n  font-size: 14px;\n}\n.ace-tm .ace_print-margin {\n  display: none;\n}\n.ace-tm .ace_gutter-active-line,\n.ace-tm .ace_active-line {\n  background-color: #f0f0f0;\n}\n.ace-tm .ace_gutter {\n  background: #fff;\n  color: rgba(0, 0, 0, 0.54);\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 400 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80640,15 +80718,15 @@
 	  value: true
 	});
 
-	var _model = __webpack_require__(401);
+	var _model = __webpack_require__(403);
 
 	var _model2 = _interopRequireDefault(_model);
 
-	var _model3 = __webpack_require__(402);
+	var _model3 = __webpack_require__(404);
 
 	var _model4 = _interopRequireDefault(_model3);
 
-	__webpack_require__(405);
+	__webpack_require__(407);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80662,13 +80740,13 @@
 	exports.default = modelComponent;
 
 /***/ },
-/* 401 */
+/* 403 */
 /***/ function(module, exports) {
 
 	module.exports = "<div ng-if=\"!vm.renderError\" ui-ace=\"vm.settings\" ng-model=\"vm.model\" flex></div>\n<div class=\"error__message\" ng-if=\"vm.renderError\" flex ng-bind=\"vm.errorMessage\"></div>"
 
 /***/ },
-/* 402 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80677,7 +80755,7 @@
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(403);
+	var _stringify = __webpack_require__(405);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -80706,7 +80784,10 @@
 
 	      // Listen for new component data and render it
 	      this.listener = $rootScope.$on('render', function (event, entity) {
-	        _this.render(event, entity.component);
+	        setTimeout(function () {
+	          _this.render(event, entity.component);
+	          $rootScope.$apply();
+	        }, 0);
 	      });
 
 	      // ACE editor settings
@@ -80779,13 +80860,13 @@
 	exports.default = ModelController;
 
 /***/ },
-/* 403 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(404), __esModule: true };
+	module.exports = { "default": __webpack_require__(406), __esModule: true };
 
 /***/ },
-/* 404 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var core  = __webpack_require__(317)
@@ -80795,13 +80876,13 @@
 	};
 
 /***/ },
-/* 405 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(406);
+	var content = __webpack_require__(408);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(305)(content, {});
@@ -80821,7 +80902,7 @@
 	}
 
 /***/ },
-/* 406 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(304)();
@@ -80835,7 +80916,7 @@
 
 
 /***/ },
-/* 407 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80850,7 +80931,7 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var directives = angular.module('asb.directives', []);
+	var directives = angular.module('sb.directives', []);
 
 	exports.default = directives;
 
