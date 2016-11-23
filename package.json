@@ -9,6 +9,7 @@
     "url": "https://github.com/ui-storybook/sb"
   },
   "dependencies": {
+    "jsonformatter": "^0.6.0"
   },
   "devDependencies": {
     "git-url-parse": "*",
@@ -75,10 +76,10 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "config": {                                                                                                           
-    "commitizen": {                                                                                                     
-      "path": "node_modules/cz-conventional-changelog"                                                                                       
-    }                                                                                                                   
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "author": "freeman14"
 }

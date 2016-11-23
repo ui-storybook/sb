@@ -14,6 +14,7 @@ import 'ace-builds/src-min-noconflict/mode-json.js';
 import 'ace-builds/src-min-noconflict/mode-html.js';
 import 'angular-ui-ace';
 
+import 'jsonformatter';
 
 import routeConfig from './core.route';
 
@@ -22,7 +23,8 @@ const core = angular.module('sb.core', [
     'ngMaterial',
     'ngAnimate',
     'angularResizable',
-    'ui.ace'
+    'ui.ace',
+    'jsonFormatter'
 ]);
 
 core.constant('local', (() => {
