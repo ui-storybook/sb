@@ -4,9 +4,6 @@ class InterceptorController {
         this.requests = {};
 
         this.updateXHROpenMethod();
-        $http.get('https://randomuser.me/api/');
-        $http.post('https://randomuser.me/api/', {});
-
     }
 
     $onDestroy() {
@@ -21,7 +18,7 @@ class InterceptorController {
     updateXHROpenMethod() {
         let self = this;
         this.origOpen = XMLHttpRequest.prototype.open;
-        XMLHttpRequest.prototype.open = function() {
+        XMLHttpRequest.prototype.open = function () {
             console.log(this);
             const id = self.generateID();
             let request = {
@@ -30,7 +27,7 @@ class InterceptorController {
                 inProgress: true
             };
             self.requests[id] = request;
-            this.addEventListener('load', function() {
+            this.addEventListener('load', function () {
                 try {
                     self.requests[id].responce = JSON.parse(this.responseText);
                 } catch (e) { }
