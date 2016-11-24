@@ -69,9 +69,15 @@
 
 	var _helper4 = _interopRequireDefault(_helper3);
 
+	var _interceptor = __webpack_require__(331);
+
+	var _interceptor2 = _interopRequireDefault(_interceptor);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var _module = angular.module('helper', ['ngSanitize']);
+
+	_module.service('SBInterceptor', _interceptor2.default);
 
 	_module.directive('compile', _helper4.default);
 
@@ -859,7 +865,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var HelperController = function () {
-	    function HelperController($scope) {
+	    function HelperController($scope, SBInterceptor) {
 	        (0, _classCallCheck3.default)(this, HelperController);
 
 	        this.$scope = $scope;
@@ -1267,6 +1273,84 @@
 	        });
 	    };
 	};
+
+/***/ },
+
+/***/ 331:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _classCallCheck2 = __webpack_require__(310);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(311);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InterceptorController = function () {
+	    function InterceptorController() {
+	        (0, _classCallCheck3.default)(this, InterceptorController);
+
+	        this.requests = {};
+	        this.updateXHROpenMethod();
+	    }
+
+	    (0, _createClass3.default)(InterceptorController, [{
+	        key: 'updateXHROpenMethod',
+	        value: function updateXHROpenMethod() {
+	            var self = this;
+	            this.origOpen = XMLHttpRequest.prototype.open;
+	            XMLHttpRequest.prototype.open = function (type, url) {
+	                var _this = this;
+
+	                // Skip request to browser-sync
+	                if (url.indexOf('browser-sync/socket.io') === -1) {
+	                    (function () {
+	                        var id = self.generateID();
+	                        var inProgress = true;
+	                        var request = { type: type, url: url, inProgress: inProgress, id: id };
+
+	                        self.sendRequestToSB(request);
+
+	                        _this.addEventListener('load', function () {
+	                            try {
+	                                request.responce = JSON.parse(this.responseText);
+	                            } catch (e) {}
+	                            request.status = this.status;
+	                            request.statusText = this.statusText;
+	                            request.inProgress = false;
+	                            self.sendRequestToSB(request, 'update');
+	                        });
+	                    })();
+	                }
+
+	                self.origOpen.apply(this, arguments);
+	            };
+	        }
+	    }, {
+	        key: 'sendRequestToSB',
+	        value: function sendRequestToSB(request) {
+	            var message = 'xhr';
+	            window.parent.postMessage({ message: message, request: request }, '*');
+	        }
+	    }, {
+	        key: 'generateID',
+	        value: function generateID() {
+	            return Math.random().toString(36).substr(2, 10);
+	        }
+	    }]);
+	    return InterceptorController;
+	}();
+
+	exports.default = InterceptorController;
 
 /***/ }
 
