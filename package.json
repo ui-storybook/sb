@@ -73,6 +73,8 @@
     "yargs": "*"
   },
   "scripts": {
+    "start": "gulp serve",
+    "build": "gulp build",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
