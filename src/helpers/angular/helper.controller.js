@@ -1,6 +1,6 @@
 class HelperController {
 
-    constructor($scope) {
+    constructor($scope, SBInterceptor) {
         this.$scope = $scope;
 
         // Allowed events from parrent iFrame
