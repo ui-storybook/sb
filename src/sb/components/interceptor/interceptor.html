@@ -1,16 +1,16 @@
-<div class="sb__interceptors">
-
-    <div ng-repeat="(key, request) in vm.requests" class="interceptors__list" layout="column">
-        <div class="request__info" ng-click="vm.openRequest(request)" layout="row" layout-align="center center">
-            <div class="request__status" ng-bind="request.status + ' ' + request.statusText" ng-if="!request.inProgress" flex="25"></div>
-            <div class="request__type" ng-bind="request.type" flex="10"></div>
-            <div class="request__url" ng-bind="request.url" flex="60"></div>
-            <md-button ng-click="vm.copyResponce($event, request.responce)" class="request__copy" md-no-ink="true" aria-label="Copy responce">Copy responce</md-button>
-        </div>
+<md-content class="sb__interceptors" ng-class="{'request__close': !vm.activeRequest.selected}">
+    <section ng-repeat="(key, request) in vm.requests" class="interceptors__list" layout="column">
+        <md-subheader>
+            <div class="request__info" ng-click="vm.openRequest(request)" layout="row" layout-align="center center">
+                <div class="request__status" ng-bind="request.status + ' ' + request.statusText" ng-if="!request.inProgress" flex="25"></div>
+                <div class="request__type" ng-bind="request.type" flex="10"></div>
+                <div class="request__url" ng-bind="request.url" flex="60"></div>
+                <md-button ng-click="vm.copyResponce($event, request.responce)" class="request__copy" md-no-ink="true" aria-label="Copy responce">Copy responce</md-button>
+            </div>
+        </md-subheader>
         <md-progress-linear ng-if="request.inProgress" md-mode="indeterminate"></md-progress-linear>
         <div ng-if="request.selected" class="request__responce">
             <json-formatter json="request.responce" open="1"></json-formatter>
         </div>
-    </div>
-
-</div>
+    </section>
+</md-content>

@@ -12,9 +12,27 @@ interceptor {
 
 }
 
+.request__close .md-subheader-wrapper{
+  display: none !important;
+}
+
 .interceptors__list {
     font-size: 13px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+    background: #fff;
+
+    .md-subheader .md-subheader-inner {
+      padding: 0;
+    }
+
+    .md-subheader {
+      background: #fff;
+    }
+
+}
+
+.md-subheader-inner {
+  padding: 0 !important;
 }
 
 .request__info {
@@ -74,6 +92,7 @@ interceptor {
 
   .json-formatter-row {
     margin-left: 1em;
+    padding: 5px 0;
   }
 
   .children {
@@ -120,7 +139,6 @@ interceptor {
 
     &:after {
       display: inline-block;
-      transition: transform @rotate-time ease-in;
       content: "►";
     }
 

@@ -1,42 +1,27 @@
 class InterceptorController {
-    constructor($rootScope, $parse, $http) {
-        this.$rootScope = $rootScope;
+    constructor($scope) {
+        this.$scope = $scope;
         this.requests = {};
 
-        this.updateXHROpenMethod();
+        const eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+        const eventer = window[eventMethod];
+        const messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+        eventer(messageEvent, (e) => {
+            if (e.data.message === 'xhr') {
+                this.updateResponce(e.data);
+            }
+        }, false);
     }
 
-    $onDestroy() {
-        XMLHttpRequest.prototype.open = this.origOpen;
+    updateResponce(data) {
+        this.requests[data.request.id] = data.request;
+        this.$scope.$apply();
     }
 
     copyResponce($event, responce) {
         window.prompt("Copy to clipboard: CMD(Ctrl)+C, Enter", JSON.stringify(responce));
         $event.stopImmediatePropagation();
-    }
-
-    updateXHROpenMethod() {
-        let self = this;
-        this.origOpen = XMLHttpRequest.prototype.open;
-        XMLHttpRequest.prototype.open = function () {
-            console.log(this);
-            const id = self.generateID();
-            let request = {
-                type: arguments[0],
-                url: arguments[1],
-                inProgress: true
-            };
-            self.requests[id] = request;
-            this.addEventListener('load', function () {
-                try {
-                    self.requests[id].responce = JSON.parse(this.responseText);
-                } catch (e) { }
-                self.requests[id].status = this.status;
-                self.requests[id].statusText = this.statusText;
-                self.requests[id].inProgress = false;
-            });
-            self.origOpen.apply(this, arguments);
-        };
     }
 
     openRequest(request) {
@@ -49,10 +34,6 @@ class InterceptorController {
         }
         this.activeRequest = request;
         this.activeRequest.selected = true;
-    }
-
-    generateID() {
-        return Math.random().toString(36).substr(2, 10);
     }
 
 }
