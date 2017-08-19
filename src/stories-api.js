@@ -23,12 +23,12 @@ class StoriesAPI {
         sectionAPI.story = (storyName) => {
             let section = this.sections[name];
             let storyAPI = {};
-            storyAPI.add = (title, template, model) => {
+            storyAPI.add = (title, template, model, docs) => {
                 if (!section[storyName]) {
                     section[storyName] = [];
                 }
                 const id = Math.random().toString(36).substr(2, 9);
-                section[storyName].push({ title, template, model, id });
+                section[storyName].push({ title, template, model, docs, id });
                 return storyAPI;
             }
             return storyAPI;

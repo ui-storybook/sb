@@ -9,11 +9,10 @@
     "url": "https://github.com/ui-storybook/sb"
   },
   "dependencies": {
+    "angular-sanitize": "1.5",
     "jsonformatter": "^0.6.0"
   },
   "devDependencies": {
-    "git-url-parse": "*",
-    "shelljs": "*",
     "ace-builds": "*",
     "angular-animate": "*",
     "angular-aria": "*",
@@ -41,10 +40,12 @@
     "cz-conventional-changelog": "^1.2.0",
     "del": "*",
     "fs-walk": "*",
+    "git-url-parse": "*",
     "gulp": "*",
     "gulp-rename": "*",
     "gulp-template": "*",
     "gulp-util": "*",
+    "html-loader": "^0.5.1",
     "html-webpack-plugin": "*",
     "karma": "*",
     "karma-chai": "*",
@@ -56,6 +57,7 @@
     "less": "*",
     "less-loader": "*",
     "lodash": "*",
+    "markdown-loader": "^2.0.1",
     "mocha": "*",
     "ng-annotate-loader": "*",
     "node-libs-browser": "*",
@@ -63,6 +65,7 @@
     "raw-loader": "*",
     "run-sequence": "*",
     "semantic-release": "^4.3.5",
+    "shelljs": "*",
     "style-loader": "*",
     "stylus": "*",
     "stylus-loader": "*",

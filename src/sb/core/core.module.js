@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 
 import 'angular-ui-router';
+import 'angular-sanitize';
 
 import 'angular-material';
 import 'angular-animate';
@@ -20,6 +21,7 @@ import routeConfig from './core.route';
 
 const core = angular.module('sb.core', [
     'ui.router',
+    'ngSanitize',
     'ngMaterial',
     'ngAnimate',
     'angularResizable',

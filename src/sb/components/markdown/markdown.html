@@ -1,0 +1,5 @@
+<div ng-if="vm.docs" class="markdown-body" ng-bind-html="vm.docs"></div>
+<div class="error__message markdown__message" ng-if="!vm.docs" flex>
+    <div><i class="material-icons">note_add</i></div>
+    <div>There is no documentation or notes for this component</div>
+</div>

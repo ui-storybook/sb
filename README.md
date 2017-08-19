@@ -142,6 +142,20 @@ overview.story('SB demo component')
 
 Than simply run `npm run sb` — this will load server with hotreload and run SB with your application.
 
+### Components Documentation
+SB can show documentation or notes for your components from `.md` files.
+
+```js
+
+// Import your md file
+import docs from './docs.md';
+
+let calendar = sb.section('Week');
+
+// And pass with 4th param to story
+calendar.story('Days of the week')
+  .add('Sunday', '<p>{{ vm.sunday }}</p>', {}, docs)
+``` 
 
 ### Configuration 
 SB use Webpack to build everything. If you need to change or update build process go to `sb/.webpack` folder:
