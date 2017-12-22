@@ -34,6 +34,8 @@ sb-create
 
 This will create `sb` folder with all dependencies based on project type.
 
+Add the `-Y` or `--use-yarn` flag if your project uses yarn instead of npm as package manager. 
+
 ## Usage
 #### Available commands
 ```bash
